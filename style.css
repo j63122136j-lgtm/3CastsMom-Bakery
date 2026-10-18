@@ -1,0 +1,160 @@
+/* Jasmine's Bakery Studio — Apple Dark Mode & Glassmorphism Stylesheet */
+:root {
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    * {
+      -webkit-tap-highlight-color: transparent;
+      box-sizing: border-box;
+    }
+    html, body {
+      background-color: #000000;
+      color: #F5F5F7;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Noto Sans TC", sans-serif;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      scroll-behavior: smooth;
+    }
+    /* Apple Glassmorphism */
+    .apple-glass {
+      background: rgba(26, 26, 32, 0.68);
+      backdrop-filter: blur(28px) saturate(190%);
+      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      border: 1px solid rgba(255, 255, 255, 0.11);
+      box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+    }
+    .apple-glass-subtle {
+      background: rgba(36, 36, 44, 0.48);
+      backdrop-filter: blur(20px) saturate(160%);
+      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .apple-glass-pill {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .apple-glass-pill:hover, .apple-glass-pill:active {
+      background: rgba(255, 255, 255, 0.15);
+      transform: scale(1.02);
+    }
+    .apple-nav-glass {
+      background: rgba(12, 12, 16, 0.78);
+      backdrop-filter: blur(30px) saturate(200%);
+      -webkit-backdrop-filter: blur(30px) saturate(200%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+    }
+    .apple-dock-glass {
+      background: rgba(20, 20, 26, 0.84);
+      backdrop-filter: blur(32px) saturate(200%);
+      -webkit-backdrop-filter: blur(32px) saturate(200%);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    }
+    /* Apple Keynote Gradient Text */
+    .text-gradient-gold {
+      background: linear-gradient(135deg, #FFF6E5 0%, #FFD60A 45%, #FF9F0A 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .text-gradient-silver {
+      background: linear-gradient(180deg, #FFFFFF 0%, #A1A1AA 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    /* Smooth Spring Animations */
+    @keyframes fadeUpSpring {
+      0% { opacity: 0; transform: translateY(18px) scale(0.985); }
+      100% { opacity: 1; transform: translateY(0) scale(1); }
+    }
+    @keyframes pulseGlow {
+      0%, 100% { opacity: 0.45; transform: scale(1); }
+      50% { opacity: 0.75; transform: scale(1.06); }
+    }
+    .animate-spring {
+      animation: fadeUpSpring 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .card-interactive {
+      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.32s ease;
+    }
+    .card-interactive:hover {
+      transform: translateY(-2px);
+      border-color: rgba(255, 159, 10, 0.35);
+      box-shadow: 0 24px 48px -12px rgba(255, 159, 10, 0.12);
+    }
+    .card-interactive:active {
+      transform: scale(0.985);
+    }
+    /* Custom Range Slider (iOS Style) */
+    input[type="range"].ios-slider {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.16);
+      border-radius: 999px;
+      outline: none;
+    }
+    input[type="range"].ios-slider::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      background: #FFFFFF;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.55), 0 0 0 2px rgba(255, 159, 10, 0.8);
+      cursor: pointer;
+      transition: transform 0.15s ease;
+    }
+    input[type="range"].ios-slider::-webkit-slider-thumb:active {
+      transform: scale(1.15);
+      background: #FFD60A;
+    }
+    /* Hide number input spinners for clean iOS look */
+    input[type=number]::-webkit-inner-spin-button,
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(255, 255, 255, 0.18);
+      border-radius: 999px;
+    }
+    /* Device Frame Simulation for Preview Mode */
+    .viewport-iphone {
+      max-width: 430px !important;
+      margin: 1.5rem auto !important;
+      border: 10px solid #27272A !important;
+      border-radius: 48px !important;
+      box-shadow: 0 0 0 2px #52525B, 0 35px 80px rgba(0,0,0,0.95) !important;
+      overflow-x: hidden;
+    }
+    .viewport-ipad {
+      max-width: 960px !important;
+      margin: 1.5rem auto !important;
+      border: 12px solid #27272A !important;
+      border-radius: 36px !important;
+      box-shadow: 0 0 0 2px #52525B, 0 35px 80px rgba(0,0,0,0.95) !important;
+      overflow-x: hidden;
+    }
+    /* Kitchen Big Font Mode */
+    .kitchen-mode .weight-num {
+      font-size: 1.65rem !important;
+      line-height: 2rem !important;
+    }
+    .kitchen-mode .ing-title {
+      font-size: 1.18rem !important;
+    }
