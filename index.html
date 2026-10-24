@@ -70,24 +70,33 @@
               <span class="font-semibold tracking-tight text-white text-sm sm:text-base">Jasmine's Bakery</span>
               <span class="text-[10px] uppercase tracking-widest px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/30 font-medium">Pro Studio</span>
             </div>
-            <p class="text-[11px] text-apple-muted hidden sm:block">iOS / iPadOS 動態配方換算與成本定價中樞</p>
+            <p class="text-[11px] text-apple-muted hidden sm:block">iOS / iPadOS 職人烘焙動態配方與比例秤重中樞</p>
           </div>
         </div>
 
         <!-- Desktop/iPad Center Segmented Navigation -->
-        <nav class="hidden md:flex items-center gap-1 p-1 rounded-full bg-white/[0.06] border border-white/10" aria-label="主要導覽">
+        <nav class="hidden md:flex items-center gap-1.5 p-1 rounded-full bg-white/[0.06] border border-white/10" aria-label="主要導覽">
           <button type="button" data-tab="calculator" class="nav-tab-btn px-4 py-1.5 rounded-full text-xs font-medium transition-all bg-white text-black shadow-sm">
             ⚖️ 動態配方計算器
           </button>
-          <button type="button" data-tab="recipes" class="nav-tab-btn px-4 py-1.5 rounded-full text-xs font-medium transition-all text-zinc-300 hover:text-white">
-            📖 經典配方與排程
-          </button>
-          <button type="button" data-tab="ingredients" class="nav-tab-btn px-4 py-1.5 rounded-full text-xs font-medium transition-all text-zinc-300 hover:text-white">
-            🌾 原料資料庫 (59)
-          </button>
-          <button type="button" data-tab="pricing" class="nav-tab-btn px-4 py-1.5 rounded-full text-xs font-medium transition-all text-zinc-300 hover:text-white">
-            📊 成本與定價總覽
-          </button>
+          <div class="flex items-center">
+            <button type="button" data-tab="recipes" class="nav-tab-btn px-3.5 py-1.5 rounded-full text-xs font-medium transition-all text-zinc-300 hover:text-white">
+              📖 經典配方與排程
+            </button>
+            <span class="lock-indicator text-[10px] text-amber-400 -ml-1.5 pr-1 pointer-events-none">🔒</span>
+          </div>
+          <div class="flex items-center">
+            <button type="button" data-tab="ingredients" class="nav-tab-btn px-3.5 py-1.5 rounded-full text-xs font-medium transition-all text-zinc-300 hover:text-white">
+              🌾 原料資料庫 (59)
+            </button>
+            <span class="lock-indicator text-[10px] text-amber-400 -ml-1.5 pr-1 pointer-events-none">🔒</span>
+          </div>
+          <div class="flex items-center">
+            <button type="button" data-tab="pricing" class="nav-tab-btn px-3.5 py-1.5 rounded-full text-xs font-medium transition-all text-zinc-300 hover:text-white">
+              📊 成本與定價總覽
+            </button>
+            <span class="lock-indicator text-[10px] text-amber-400 -ml-1.5 pr-1 pointer-events-none">🔒</span>
+          </div>
         </nav>
 
         <!-- Right Quick Controls: Viewport Preview & Kitchen Mode & GitHub Guide -->
@@ -117,47 +126,33 @@
     <!-- Main Container -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-4 sm:pt-6 space-y-6">
 
-      <!-- Apple Keynote Style Hero Banner (Collapsible on Mobile for Fast Access) -->
+      <!-- Apple Keynote Style Hero Banner (Compact & Pure Baking Focus - Zero Money Info) -->
       <section id="heroSection" class="relative rounded-3xl overflow-hidden border border-white/15 shadow-2xl animate-spring">
-        <!-- Background Studio Image -->
-        <div class="relative min-h-[250px] sm:min-h-[300px] lg:min-h-[330px] flex flex-col justify-end p-5 sm:p-8 lg:p-10">
+        <div class="relative min-h-[160px] sm:min-h-[190px] flex flex-col justify-end p-5 sm:p-7 lg:p-8">
           <img src="assets/hero.jpg" alt="Jasmine's Bakery Artisanal Collection" class="absolute inset-0 w-full h-full object-cover object-center scale-105 transition-transform duration-1000 hover:scale-100" />
-          <!-- Multi-layer Dark Apple Vignette Overlay -->
           <div class="absolute inset-0 bg-gradient-to-t from-black via-black/75 to-black/30"></div>
-          <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
+          <div class="absolute inset-0 bg-gradient-to-r from-black/90 via-black/55 to-transparent"></div>
 
-          <!-- Hero Content -->
-          <div class="relative z-10 max-w-2xl space-y-3">
-            <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-amber-300 font-medium">
-              <span>🍎 Apple 官網級深色毛玻璃介面</span>
-              <span class="text-white/30">•</span>
-              <span>iPhone & iPad 觸控最佳化</span>
+          <div class="relative z-10 flex flex-col lg:flex-row lg:items-end justify-between gap-4">
+            <div class="space-y-2 max-w-2xl">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 text-xs text-amber-300 font-medium">
+                <span>🍎 Apple 官網級深色毛玻璃介面</span>
+                <span class="text-white/30">•</span>
+                <span>iPhone & iPad 直覺秤重</span>
+              </div>
+              <h1 class="text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight leading-tight">
+                <span class="text-gradient-silver">精準掌控每一克奶油與麵粉。</span>
+                <span class="text-gradient-gold block sm:inline">Jasmine's 動態烘焙配方中樞</span>
+              </h1>
+              <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed">
+                同步連結 <a href="https://docs.google.com/spreadsheets/d/1jDieeGiKFCe8vaAAr6H7entZuC3gUYEQCYz-O3LkZuo/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-amber-400 underline decoration-amber-400/50 hover:text-amber-300 font-medium">Jasmine's Recipe Google 試算表</a>。直覺點選今日烘焙品項、以整數進位調整製作數量，立即按比例放大或縮小全部原料克數。
+              </p>
             </div>
-            <h1 class="text-2xl sm:text-4xl lg:text-5xl font-bold tracking-tight leading-tight">
-              <span class="text-gradient-silver">精準掌控每一克奶油與麵粉。</span><br/>
-              <span class="text-gradient-gold">Jasmine's 烘焙配方與成本中樞</span>
-            </h1>
-            <p class="text-xs sm:text-sm text-zinc-300 leading-relaxed max-w-xl">
-              同步連結 <a href="https://docs.google.com/spreadsheets/d/1jDieeGiKFCe8vaAAr6H7entZuC3gUYEQCYz-O3LkZuo/edit?usp=sharing" target="_blank" rel="noopener noreferrer" class="text-amber-400 underline decoration-amber-400/50 hover:text-amber-300 font-medium">Jasmine's Recipe Google 試算表</a> 四大核心分頁。自由輸入今日欲製作的麵包個數或份數，即時按比例換算奶油、麵粉等全部原料克數、烘焙百分比與單批毛利。
-            </p>
 
-            <!-- Hero Quick Metrics Bar -->
-            <div class="pt-2 grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-              <div class="apple-glass-subtle rounded-2xl px-3.5 py-2.5">
-                <div class="text-[11px] text-zinc-400">經典配方庫</div>
-                <div class="text-base sm:text-lg font-bold text-white">5 款主力 <span class="text-xs font-normal text-amber-400">+ 波蘭種</span></div>
-              </div>
-              <div class="apple-glass-subtle rounded-2xl px-3.5 py-2.5">
-                <div class="text-[11px] text-zinc-400">建檔嚴選原料</div>
-                <div class="text-base sm:text-lg font-bold text-white">59 項 <span class="text-xs font-normal text-zinc-400">9 大類別</span></div>
-              </div>
-              <div class="apple-glass-subtle rounded-2xl px-3.5 py-2.5">
-                <div class="text-[11px] text-zinc-400">最高毛利明星</div>
-                <div class="text-base sm:text-lg font-bold text-emerald-400">瑪德蓮 64.9%</div>
-              </div>
-              <div class="apple-glass-subtle rounded-2xl px-3.5 py-2.5">
-                <div class="text-[11px] text-zinc-400">目前選中配方目標</div>
-                <div id="heroActiveSummary" class="text-base sm:text-lg font-bold text-amber-400">生吐司 8 條 (1份)</div>
+            <div class="flex items-center gap-3 shrink-0">
+              <div class="apple-glass-subtle rounded-2xl px-4 py-2.5 border border-amber-400/30">
+                <div class="text-[11px] text-zinc-400">目前烘焙目標</div>
+                <div id="heroActiveSummary" class="text-base sm:text-xl font-extrabold text-amber-400 font-mono">生吐司 8 條 (1份)</div>
               </div>
             </div>
           </div>
@@ -167,106 +162,106 @@
       <!-- ===================================================================== -->
       <!-- TAB 1: 動態配方計算器 (DYNAMIC RECIPE CALCULATOR - PRIMARY WORKSPACE) -->
       <!-- ===================================================================== -->
-      <section id="tab-calculator" class="tab-panel space-y-6 animate-spring">
+      <section id="tab-calculator" class="tab-panel space-y-7 animate-spring">
         
-        <!-- Step 1: Horizontal Recipe Selector Cards (Touch-friendly on iPhone & iPad) -->
-        <div class="space-y-2.5">
+        <!-- Step 1: Enlarged Recipe Selector Cards (Touch-friendly on iPhone & iPad, Zero Money Info) -->
+        <div class="space-y-3.5">
           <div class="flex items-center justify-between">
-            <h2 class="text-sm sm:text-base font-semibold text-zinc-200 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-amber-400"></span>
+            <h2 class="text-lg sm:text-2xl font-bold text-white flex items-center gap-2.5">
+              <span class="w-3 h-3 rounded-full bg-amber-400 shadow-md shadow-amber-400/50"></span>
               <span>STEP 1 — 選擇要製作的烘焙品項</span>
             </h2>
-            <span class="text-xs text-zinc-400">點擊卡片立即切換配方基準</span>
+            <span class="text-xs sm:text-sm text-zinc-400">點擊大卡片立即切換配方基準</span>
           </div>
-          <div id="recipeSelectorGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 sm:gap-3">
+          <div id="recipeSelectorGrid" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3.5 sm:gap-4">
             <!-- Populated dynamically by JS -->
           </div>
         </div>
 
         <!-- Step 2 & Step 3 Master-Detail Grid (iPad Landscape 12-col Split View) -->
-        <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          <!-- LEFT COLUMN (5 cols on lg): Portion & Quantity Scaling Control Center -->
+          <!-- LEFT COLUMN (5 cols on lg): Enlarged Portion & Integer Quantity Scaling Control Center -->
           <div class="lg:col-span-5 space-y-5">
             
             <!-- Primary Scaling Card -->
-            <div class="apple-glass rounded-3xl p-5 sm:p-6 space-y-5 border border-amber-500/25">
+            <div class="apple-glass rounded-3xl p-6 sm:p-7 space-y-6 border border-amber-500/30">
               <div class="flex items-start justify-between gap-3">
                 <div>
-                  <span class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold">STEP 2 — 彈性調整製作份數與數量</span>
-                  <h3 id="calcRecipeTitle" class="text-2xl font-bold text-white mt-0.5">生吐司 (RCP-01)</h3>
-                  <p id="calcRecipeMeta" class="text-xs text-zinc-400 mt-0.5">試算表基準：1 份可做 8 條 • 單批基準工時 0.83 小時</p>
+                  <span class="text-xs sm:text-sm uppercase tracking-wider text-amber-400 font-bold">STEP 2 — 調整製作數量與份數</span>
+                  <h3 id="calcRecipeTitle" class="text-3xl sm:text-4xl font-extrabold text-white mt-1">生吐司 (RCP-01)</h3>
+                  <p id="calcRecipeMeta" class="text-xs sm:text-sm text-zinc-300 mt-1">試算表基準：1 份可做 8 條</p>
                 </div>
-                <span id="calcScaleBadge" class="px-3 py-1 rounded-full text-xs font-bold bg-amber-500/20 text-amber-300 border border-amber-400/30">
-                  1.00x 標準份量
+                <span id="calcScaleBadge" class="px-3.5 py-1.5 rounded-full text-sm sm:text-base font-extrabold bg-amber-500/20 text-amber-300 border border-amber-400/40 shrink-0">
+                  1 份 (1x)
                 </span>
               </div>
 
-              <!-- Dual Input Box: 1. 欲製作麵包數量 (Pieces)  2. 欲製作份數/倍率 (Batches) -->
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
+              <!-- Enlarged Dual Input Box: 1. 欲製作麵包數量 (整數進位)  2. 製作份數 (配方倍率) -->
+              <div class="space-y-4">
                 
-                <!-- Control A: Target Bread Count (本次欲製作數量) -->
-                <div class="apple-glass-subtle rounded-2xl p-3.5 border border-white/10 focus-within:border-amber-400/70 transition-colors">
-                  <div class="flex items-center justify-between mb-1.5">
-                    <label for="targetPiecesInput" class="text-xs font-medium text-zinc-300">🎯 本次欲製作麵包數量</label>
-                    <span id="targetPiecesUnitLabel" class="text-xs font-semibold text-amber-400">單位：條</span>
+                <!-- Control A: Target Bread Count (本次欲製作數量 - 整數進位) -->
+                <div class="apple-glass-subtle rounded-3xl p-5 border-2 border-amber-400/35 focus-within:border-amber-400 transition-colors">
+                  <div class="flex items-center justify-between mb-2">
+                    <label for="targetPiecesInput" class="text-sm sm:text-base font-bold text-white">🎯 本次欲製作麵包數量（整數進位）</label>
+                    <span id="targetPiecesUnitLabel" class="text-sm sm:text-base font-bold text-amber-400">單位：條</span>
                   </div>
-                  <div class="flex items-center justify-between gap-2">
-                    <button type="button" id="decPiecesBtn" class="w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 active:scale-90 text-white font-bold text-xl flex items-center justify-center transition-all" aria-label="減少製作數量">−</button>
-                    <input type="number" id="targetPiecesInput" value="8" min="0.1" step="1" class="w-full text-center bg-transparent text-2xl sm:text-3xl font-extrabold text-white focus:outline-none font-mono" />
-                    <button type="button" id="incPiecesBtn" class="w-11 h-11 rounded-xl bg-amber-500 hover:bg-amber-400 active:scale-90 text-black font-bold text-xl flex items-center justify-center transition-all shadow-md shadow-amber-500/20" aria-label="增加製作數量">+</button>
+                  <div class="flex items-center justify-between gap-3 my-1">
+                    <button type="button" id="decPiecesBtn" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/10 hover:bg-white/20 active:scale-90 text-white font-extrabold text-3xl flex items-center justify-center transition-all shrink-0" aria-label="減少製作數量">−</button>
+                    <input type="number" id="targetPiecesInput" value="8" min="1" step="1" class="w-full text-center bg-transparent text-4xl sm:text-5xl font-extrabold text-white focus:outline-none font-mono" />
+                    <button type="button" id="incPiecesBtn" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-amber-500 hover:bg-amber-400 active:scale-90 text-black font-extrabold text-3xl flex items-center justify-center transition-all shadow-lg shadow-amber-500/25 shrink-0" aria-label="增加製作數量">+</button>
                   </div>
-                  <div id="baseYieldHint" class="text-[11px] text-zinc-400 text-center mt-1.5">
-                    試算表 1 份基準產量：<strong class="text-zinc-200">8 條</strong>
+                  <div id="baseYieldHint" class="text-xs sm:text-sm text-zinc-300 text-center mt-2">
+                    試算表 1 份基準產量：<strong class="text-amber-300 font-bold">8 條</strong>
                   </div>
                 </div>
 
                 <!-- Control B: Target Batch Multiplier (本次欲製作份數/倍率) -->
-                <div class="apple-glass-subtle rounded-2xl p-3.5 border border-white/10 focus-within:border-blue-400/70 transition-colors">
-                  <div class="flex items-center justify-between mb-1.5">
-                    <label for="targetBatchesInput" class="text-xs font-medium text-zinc-300">⚖️ 製作份數 (配方倍率)</label>
-                    <span class="text-xs font-semibold text-sky-400">單位：份 (倍)</span>
+                <div class="apple-glass-subtle rounded-3xl p-5 border border-white/15 focus-within:border-sky-400 transition-colors">
+                  <div class="flex items-center justify-between mb-2">
+                    <label for="targetBatchesInput" class="text-sm sm:text-base font-bold text-zinc-200">⚖️ 製作份數 (配方倍率)</label>
+                    <span class="text-sm sm:text-base font-bold text-sky-400">單位：份 (倍)</span>
                   </div>
-                  <div class="flex items-center justify-between gap-2">
-                    <button type="button" id="decBatchBtn" class="w-11 h-11 rounded-xl bg-white/10 hover:bg-white/20 active:scale-90 text-white font-bold text-lg flex items-center justify-center transition-all" aria-label="減少半份">−0.5</button>
-                    <input type="number" id="targetBatchesInput" value="1" min="0.05" step="0.25" class="w-full text-center bg-transparent text-2xl sm:text-3xl font-extrabold text-sky-400 focus:outline-none font-mono" />
-                    <button type="button" id="incBatchBtn" class="w-11 h-11 rounded-xl bg-sky-500 hover:bg-sky-400 active:scale-90 text-black font-bold text-lg flex items-center justify-center transition-all shadow-md shadow-sky-500/20" aria-label="增加半份">+0.5</button>
+                  <div class="flex items-center justify-between gap-3 my-1">
+                    <button type="button" id="decBatchBtn" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-white/10 hover:bg-white/20 active:scale-90 text-white font-bold text-xl flex items-center justify-center transition-all shrink-0" aria-label="減少份數">−0.5</button>
+                    <input type="number" id="targetBatchesInput" value="1" min="0.1" step="0.5" class="w-full text-center bg-transparent text-3xl sm:text-4xl font-extrabold text-sky-400 focus:outline-none font-mono" />
+                    <button type="button" id="incBatchBtn" class="w-14 h-14 sm:w-16 sm:h-16 rounded-2xl bg-sky-500 hover:bg-sky-400 active:scale-90 text-black font-bold text-xl flex items-center justify-center transition-all shadow-lg shadow-sky-500/25 shrink-0" aria-label="增加份數">+0.5</button>
                   </div>
-                  <div class="text-[11px] text-zinc-400 text-center mt-1.5">
-                    公式：<span class="font-mono text-zinc-300">預計數量 ÷ 基準產量</span>
+                  <div class="text-xs text-zinc-400 text-center mt-2">
+                    調整份數時，上方麵包數量會自動以<strong class="text-zinc-200">整數進位</strong>同步換算
                   </div>
                 </div>
               </div>
 
               <!-- Smooth iOS Range Slider -->
-              <div class="space-y-2 pt-1">
-                <div class="flex justify-between text-xs text-zinc-400">
-                  <span>滑動快速縮放份量</span>
-                  <span id="sliderValueText" class="text-amber-300 font-medium">目前：8 條 (1.00 份)</span>
+              <div class="space-y-2.5 pt-1">
+                <div class="flex justify-between text-xs sm:text-sm text-zinc-300">
+                  <span>滑動快速調整製作數量（整數）</span>
+                  <span id="sliderValueText" class="text-amber-300 font-bold">目前：8 條 (1.00 份)</span>
                 </div>
                 <input type="range" id="piecesSlider" min="1" max="32" step="1" value="8" class="ios-slider" />
               </div>
 
-              <!-- Quick Preset Chips (依麵包個數 & 依份數) -->
-              <div class="space-y-2">
-                <div class="text-xs text-zinc-400">快速選擇製作份數 / 數量：</div>
-                <div id="quickPresetsContainer" class="flex flex-wrap gap-2">
+              <!-- Quick Preset Chips (依麵包整數個數 & 依份數) -->
+              <div class="space-y-2.5">
+                <div class="text-xs sm:text-sm font-medium text-zinc-300">快速選擇製作份數 / 整數數量：</div>
+                <div id="quickPresetsContainer" class="flex flex-wrap gap-2.5">
                   <!-- Populated dynamically by JS based on current recipe baseYield -->
                 </div>
               </div>
 
-              <!-- Highlighted Flour & Butter Key Ingredient Cards (回應題目：在奶油麵粉會有指定克數，按比例提供原料克數) -->
-              <div class="pt-2 border-t border-white/10 space-y-2.5">
+              <!-- Highlighted Flour & Butter Key Ingredient Cards -->
+              <div class="pt-3 border-t border-white/10 space-y-3">
                 <div class="flex items-center justify-between">
-                  <span class="text-xs font-semibold text-amber-300 flex items-center gap-1.5">
+                  <span class="text-xs sm:text-sm font-bold text-amber-300 flex items-center gap-1.5">
                     <span>🧈</span>
-                    <span>核心麵粉與奶油乳脂即時克數（隨份數等比縮放）</span>
+                    <span>核心麵粉與奶油即時克數</span>
                   </span>
-                  <button type="button" id="openReverseScaleBtn" class="text-[11px] text-sky-400 hover:text-sky-300 underline">
+                  <button type="button" id="openReverseScaleBtn" class="text-xs text-sky-400 hover:text-sky-300 underline font-medium">
                     依現有原料克數反推 ↗
                   </button>
                 </div>
-                <div id="keyFlourButterCards" class="grid grid-cols-2 gap-2.5">
+                <div id="keyFlourButterCards" class="grid grid-cols-1 sm:grid-cols-2 gap-3">
                   <!-- Populated dynamically by JS -->
                 </div>
               </div>
@@ -274,165 +269,99 @@
               <!-- Reverse Calculator Collapsible Drawer (依指定原料克數反推份數) -->
               <div id="reverseScaleDrawer" class="hidden apple-glass-subtle rounded-2xl p-4 border border-sky-500/30 space-y-3">
                 <div class="flex items-center justify-between">
-                  <div class="text-xs font-semibold text-sky-300">🔄 依現有單一原料克數反推可做份數</div>
+                  <div class="text-xs sm:text-sm font-semibold text-sky-300">🔄 依現有單一原料克數反推可做數量（整數進位）</div>
                   <button type="button" id="closeReverseScaleBtn" class="text-xs text-zinc-400 hover:text-white">✕ 關閉</button>
                 </div>
-                <p class="text-[11px] text-zinc-400 leading-relaxed">
-                  例如冰箱只剩指定克數的無鹽奶油或麵粉，選擇該原料並輸入現有克數，即可自動反推可製作的麵包數量與其餘所有原料克數：
+                <p class="text-xs text-zinc-300 leading-relaxed">
+                  例如冰箱只剩指定克數的無鹽奶油或麵粉，選擇該原料並輸入現有克數，即可自動以整數進位反推可製作的麵包數量與其餘所有原料克數：
                 </p>
                 <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                  <select id="reverseIngSelect" class="w-full rounded-xl bg-black/60 border border-white/15 px-3 py-2 text-xs text-white focus:outline-none focus:border-sky-400">
+                  <select id="reverseIngSelect" class="w-full rounded-xl bg-black/60 border border-white/15 px-3 py-2.5 text-xs sm:text-sm text-white focus:outline-none focus:border-sky-400">
                     <!-- Populated dynamically -->
                   </select>
                   <div class="flex items-center gap-2">
-                    <input type="number" id="reverseIngGrams" placeholder="輸入克數 (g)" class="w-full rounded-xl bg-black/60 border border-white/15 px-3 py-2 text-xs text-white font-mono focus:outline-none focus:border-sky-400" />
-                    <button type="button" id="applyReverseScaleBtn" class="px-3.5 py-2 rounded-xl bg-sky-500 text-black font-semibold text-xs whitespace-nowrap hover:bg-sky-400 transition-all">套用反推</button>
+                    <input type="number" id="reverseIngGrams" placeholder="輸入克數 (g)" class="w-full rounded-xl bg-black/60 border border-white/15 px-3 py-2.5 text-xs sm:text-sm text-white font-mono focus:outline-none focus:border-sky-400" />
+                    <button type="button" id="applyReverseScaleBtn" class="px-4 py-2.5 rounded-xl bg-sky-500 text-black font-bold text-xs sm:text-sm whitespace-nowrap hover:bg-sky-400 transition-all">套用反推</button>
                   </div>
                 </div>
-              </div>
-            </div>
-
-            <!-- Live Batch Cost & Profit Summary Card (同步試算表 R31:R39) -->
-            <div class="apple-glass rounded-3xl p-5 sm:p-6 space-y-4">
-              <div class="flex items-center justify-between">
-                <div>
-                  <span class="text-[11px] uppercase tracking-wider text-zinc-400 font-semibold">LIVE COST & PROFIT</span>
-                  <h3 class="text-lg font-bold text-white">本批生產成本與毛利即時核算</h3>
-                </div>
-                <div class="flex items-center gap-1 bg-white/[0.06] p-1 rounded-xl border border-white/10 text-[11px]">
-                  <span class="text-zinc-400 px-1.5">單位切換:</span>
-                  <button type="button" data-unit="g" class="unit-toggle-btn px-2 py-0.5 rounded-lg bg-amber-500 text-black font-bold">g</button>
-                  <button type="button" data-unit="kg" class="unit-toggle-btn px-2 py-0.5 rounded-lg text-zinc-300 hover:text-white">kg</button>
-                  <button type="button" data-unit="oz" class="unit-toggle-btn px-2 py-0.5 rounded-lg text-zinc-300 hover:text-white">oz</button>
-                </div>
-              </div>
-
-              <!-- Special Alert / Toggle for Cinnamon Roll Lemon Zest vs Lemon Juice in Spreadsheet -->
-              <div id="cinnamonLemonNotice" class="hidden rounded-2xl p-3.5 bg-amber-500/10 border border-amber-400/30 space-y-2">
-                <div class="flex items-start justify-between gap-2">
-                  <div class="text-xs font-semibold text-amber-300 flex items-center gap-1.5">
-                    <span>💡 試算表「肉桂捲 — 焦糖蘋果餡」檸檬成本智慧提示</span>
-                  </div>
-                  <label class="inline-flex items-center cursor-pointer shrink-0">
-                    <input type="checkbox" id="fixCinnamonLemonToggle" class="sr-only peer">
-                    <div class="w-9 h-5 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all relative peer-checked:bg-emerald-500"></div>
-                  </label>
-                </div>
-                <p id="cinnamonLemonDesc" class="text-[11px] text-zinc-300 leading-relaxed">
-                  原試算表中焦糖蘋果餡「檸檬汁 33g」對映至「檸檬皮 (NT$15/顆)」，使 33g 檸檬計為 NT$495。開啟右側開關可切換為「檸檬角/鮮榨檸檬汁 (NT$0.54/g)」檢視真實食材成本。
-                </p>
-              </div>
-
-              <!-- 4 Key Financial Mini Cards -->
-              <div class="grid grid-cols-2 gap-3">
-                <div class="apple-glass-subtle rounded-2xl p-3.5">
-                  <div class="text-[11px] text-zinc-400">本批食材原料總成本</div>
-                  <div id="batchFoodCostVal" class="text-xl font-extrabold text-white font-mono mt-0.5">NT$511.4</div>
-                  <div id="unitFoodCostVal" class="text-[11px] text-zinc-400 mt-0.5">單件分攤：NT$63.92</div>
-                </div>
-                <div class="apple-glass-subtle rounded-2xl p-3.5">
-                  <div class="text-[11px] text-zinc-400">本批完整總成本 (含包材/人工/電)</div>
-                  <div id="batchTotalCostVal" class="text-xl font-extrabold text-amber-400 font-mono mt-0.5">NT$838.2</div>
-                  <div id="unitTotalCostVal" class="text-[11px] text-zinc-400 mt-0.5">單件完整成本：NT$104.78</div>
-                </div>
-                <div class="apple-glass-subtle rounded-2xl p-3.5">
-                  <div class="text-[11px] text-zinc-400">本批預估總營收</div>
-                  <div id="batchRevenueVal" class="text-xl font-extrabold text-sky-400 font-mono mt-0.5">NT$1,920</div>
-                  <div id="unitPriceVal" class="text-[11px] text-zinc-400 mt-0.5">單件目前售價：NT$240</div>
-                </div>
-                <div class="apple-glass-subtle rounded-2xl p-3.5">
-                  <div class="text-[11px] text-zinc-400">本批預估毛利額 / 毛利率</div>
-                  <div id="batchProfitVal" class="text-xl font-extrabold text-emerald-400 font-mono mt-0.5">+NT$1,081.8</div>
-                  <div id="unitMarginVal" class="text-[11px] text-emerald-300 mt-0.5">預估毛利率：56.3%</div>
-                </div>
-              </div>
-
-              <!-- Detailed Cost Breakdown Table (Matches Sheet R31:R39) -->
-              <div class="overflow-x-auto">
-                <table class="w-full text-left border-collapse text-xs">
-                  <thead>
-                    <tr class="border-b border-white/10 text-zinc-400">
-                      <th class="py-2 font-medium">成本結構項目</th>
-                      <th class="py-2 font-medium">計算標準</th>
-                      <th class="py-2 font-medium text-right">本批總額</th>
-                      <th class="py-2 font-medium text-right">單件分攤</th>
-                    </tr>
-                  </thead>
-                  <tbody id="calcCostBreakdownBody" class="divide-y divide-white/5 font-mono">
-                    <!-- Populated dynamically by JS -->
-                  </tbody>
-                </table>
               </div>
             </div>
 
           </div>
 
-          <!-- RIGHT COLUMN (7 cols on lg): Dynamic Ingredient Weights & Kitchen Checklist -->
+          <!-- RIGHT COLUMN (7 cols on lg): Enlarged Step 3 Ingredient Weights & Proportions (Zero Cost Info) -->
           <div class="lg:col-span-7 space-y-5">
             
-            <div class="apple-glass rounded-3xl p-5 sm:p-6 space-y-4">
+            <div class="apple-glass rounded-3xl p-6 sm:p-7 space-y-5 border border-white/15">
               <!-- Header & Action Toolbar -->
-              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-3 border-b border-white/10">
+              <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-white/10">
                 <div>
-                  <div class="flex items-center gap-2">
-                    <span class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold">STEP 3 — 按比例換算原料克數清單</span>
-                    <span id="totalDoughWeightBadge" class="px-2.5 py-0.5 rounded-full text-[11px] font-semibold bg-white/10 text-zinc-200">
+                  <div class="flex items-center gap-2.5 flex-wrap">
+                    <span class="text-xs sm:text-sm uppercase tracking-wider text-amber-400 font-bold">STEP 3 — 原料重量與烘焙比例</span>
+                    <span id="totalDoughWeightBadge" class="px-3 py-1 rounded-full text-xs sm:text-sm font-bold bg-amber-500/20 text-amber-300 border border-amber-400/30">
                       本批總重 4,426 g
                     </span>
                   </div>
-                  <h3 class="text-lg sm:text-xl font-bold text-white mt-0.5">
-                    各原料精準秤重表 <span class="text-xs font-normal text-zinc-400">（點擊每列可打勾確認已秤重）</span>
+                  <h3 class="text-2xl sm:text-3xl font-extrabold text-white mt-1">
+                    各原料精準秤重與比例表
                   </h3>
+                  <p class="text-xs sm:text-sm text-zinc-400 mt-0.5">點擊任一原料列即可打勾標記「已秤重」</p>
                 </div>
 
-                <!-- Action Buttons: Reset Checklist, Copy Recipe, Add to Daily Schedule -->
+                <!-- Action Buttons: Unit Switcher, Reset Checklist, Copy Recipe, Add to Daily Schedule -->
                 <div class="flex flex-wrap items-center gap-2">
-                  <button type="button" id="resetChecklistBtn" class="apple-glass-pill px-3 py-1.5 rounded-xl text-xs text-zinc-300 hover:text-white">
+                  <div class="flex items-center gap-1 bg-white/[0.06] p-1 rounded-xl border border-white/10 text-xs">
+                    <span class="text-zinc-400 px-1.5">單位:</span>
+                    <button type="button" data-unit="g" class="unit-toggle-btn px-2.5 py-1 rounded-lg bg-amber-500 text-black font-bold">g</button>
+                    <button type="button" data-unit="kg" class="unit-toggle-btn px-2.5 py-1 rounded-lg text-zinc-300 hover:text-white">kg</button>
+                    <button type="button" data-unit="oz" class="unit-toggle-btn px-2.5 py-1 rounded-lg text-zinc-300 hover:text-white">oz</button>
+                  </div>
+                  <button type="button" id="resetChecklistBtn" class="apple-glass-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm text-zinc-200 hover:text-white">
                     ↺ 重置打勾
                   </button>
-                  <button type="button" id="copyScaledRecipeBtn" class="apple-glass-pill px-3 py-1.5 rounded-xl text-xs text-amber-300 hover:text-amber-200 font-medium">
+                  <button type="button" id="copyScaledRecipeBtn" class="apple-glass-pill px-3.5 py-2 rounded-xl text-xs sm:text-sm text-amber-300 hover:text-amber-200 font-semibold">
                     📋 複製本批配方克數
                   </button>
-                  <button type="button" id="addToScheduleBtn" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all">
+                  <button type="button" id="addToScheduleBtn" class="px-3.5 py-2 rounded-xl text-xs sm:text-sm font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all">
                     ＋ 加入今日排程總表
                   </button>
                 </div>
               </div>
 
               <!-- Weighing Progress Bar (For iPhone/iPad Kitchen Use) -->
-              <div class="space-y-1.5">
-                <div class="flex justify-between text-xs">
-                  <span id="weighProgressText" class="text-zinc-400">廚房秤重進度：已完成 0 / 10 項原料</span>
-                  <span id="weighPercentText" class="font-mono font-semibold text-amber-400">0%</span>
+              <div class="space-y-2">
+                <div class="flex justify-between text-xs sm:text-sm">
+                  <span id="weighProgressText" class="text-zinc-300 font-medium">廚房秤重進度：已完成 0 / 10 項原料</span>
+                  <span id="weighPercentText" class="font-mono font-bold text-amber-400">0%</span>
                 </div>
-                <div class="w-full h-2 rounded-full bg-white/10 overflow-hidden">
+                <div class="w-full h-2.5 rounded-full bg-white/10 overflow-hidden">
                   <div id="weighProgressBar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-400 transition-all duration-300" style="width: 0%"></div>
                 </div>
               </div>
 
               <!-- Stage Filter Pills (e.g., 全部環節 / 主麵團 / 抹醬 / 內餡) -->
-              <div id="stageFilterBar" class="flex flex-wrap gap-1.5 pt-1">
+              <div id="stageFilterBar" class="flex flex-wrap gap-2 pt-1">
                 <!-- Populated dynamically -->
               </div>
 
               <!-- Poolish Starter Sub-Recipe Expander (Shown when recipe uses 波蘭種, i.e., 生吐司) -->
-              <div id="poolishHelperBox" class="hidden rounded-2xl p-4 bg-sky-500/10 border border-sky-400/30 space-y-2">
+              <div id="poolishHelperBox" class="hidden rounded-2xl p-4 sm:p-5 bg-sky-500/10 border border-sky-400/30 space-y-2.5">
                 <div class="flex items-center justify-between">
-                  <div class="text-xs font-semibold text-sky-300 flex items-center gap-1.5">
+                  <div class="text-sm sm:text-base font-bold text-sky-300 flex items-center gap-1.5">
                     <span>🫧 隔夜低溫酵種「波蘭種 (RCP-06)」同步換算明細</span>
                   </div>
-                  <span id="poolishTargetTotal" class="text-xs font-mono font-bold text-sky-300">目標需 520 g</span>
+                  <span id="poolishTargetTotal" class="text-sm sm:text-base font-mono font-extrabold text-sky-300">目標需 520 g</span>
                 </div>
-                <p class="text-[11px] text-zinc-300">
+                <p class="text-xs sm:text-sm text-zinc-300">
                   生吐司配方中包含自製波蘭種。依您目前設定的份數，前一晚需準備的波蘭種內部原料克數如下：
                 </p>
-                <div id="poolishBreakdownGrid" class="grid grid-cols-3 gap-2 pt-1">
+                <div id="poolishBreakdownGrid" class="grid grid-cols-3 gap-2.5 pt-1">
                   <!-- Populated dynamically -->
                 </div>
               </div>
 
-              <!-- Ingredient Cards / Table List (Responsive: Touch Cards on Mobile, Clean Table on iPad/Desktop) -->
-              <div id="scaledIngredientsContainer" class="space-y-2.5">
+              <!-- Enlarged Ingredient Cards List (Only Ingredient / Weight / Proportion - No Cost) -->
+              <div id="scaledIngredientsContainer" class="space-y-3">
                 <!-- Populated dynamically by JS -->
               </div>
 
@@ -599,6 +528,77 @@
       <!-- TAB 4: 成本與定價總覽 (COST STRUCTURE & PRICING STRATEGY OVERVIEW)    -->
       <!-- ===================================================================== -->
       <section id="tab-pricing" class="tab-panel hidden space-y-6 animate-spring">
+
+        <!-- Moved from Homepage: Live Batch Cost & Profit Summary Card (同步試算表 R31:R39) -->
+        <div class="apple-glass rounded-3xl p-5 sm:p-7 space-y-5 border border-amber-500/30">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+            <div>
+              <span class="text-xs uppercase tracking-wider text-amber-400 font-bold">LIVE BATCH COST & PROFIT • 連動首頁目前選中品項與數量</span>
+              <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-0.5">💰 本批生產成本與毛利即時核算</h3>
+              <p id="pricingBatchTargetLabel" class="text-xs sm:text-sm text-zinc-300 mt-0.5">目前核算目標：生吐司 × 8 條 (1.00 份)</p>
+            </div>
+            <button type="button" id="jumpBackToCalcBtn" class="apple-glass-pill px-4 py-2 rounded-xl text-xs font-semibold text-amber-300 hover:text-white self-start sm:self-auto">
+              ← 返回首頁調整品項與份數
+            </button>
+          </div>
+
+          <!-- Special Alert / Toggle for Cinnamon Roll Lemon Zest vs Lemon Juice in Spreadsheet -->
+          <div id="cinnamonLemonNotice" class="hidden rounded-2xl p-4 bg-amber-500/10 border border-amber-400/30 space-y-2">
+            <div class="flex items-start justify-between gap-2">
+              <div class="text-xs sm:text-sm font-semibold text-amber-300 flex items-center gap-1.5">
+                <span>💡 試算表「肉桂捲 — 焦糖蘋果餡」檸檬成本智慧提示</span>
+              </div>
+              <label class="inline-flex items-center cursor-pointer shrink-0">
+                <input type="checkbox" id="fixCinnamonLemonToggle" class="sr-only peer">
+                <div class="w-9 h-5 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all relative peer-checked:bg-emerald-500"></div>
+              </label>
+            </div>
+            <p id="cinnamonLemonDesc" class="text-xs text-zinc-300 leading-relaxed">
+              原試算表中焦糖蘋果餡「檸檬汁 33g」對映至「檸檬皮 (NT$15/顆)」，使 33g 檸檬計為 NT$495。開啟右側開關可切換為「檸檬角/鮮榨檸檬汁 (NT$0.54/g)」檢視真實食材成本。
+            </p>
+          </div>
+
+          <!-- 4 Key Financial Mini Cards -->
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
+            <div class="apple-glass-subtle rounded-2xl p-4">
+              <div class="text-xs text-zinc-400">本批食材原料總成本</div>
+              <div id="batchFoodCostVal" class="text-xl sm:text-2xl font-extrabold text-white font-mono mt-1">NT$511.4</div>
+              <div id="unitFoodCostVal" class="text-xs text-zinc-400 mt-1">單件分攤：NT$63.92</div>
+            </div>
+            <div class="apple-glass-subtle rounded-2xl p-4">
+              <div class="text-xs text-zinc-400">本批完整總成本 (含包材/人工/電)</div>
+              <div id="batchTotalCostVal" class="text-xl sm:text-2xl font-extrabold text-amber-400 font-mono mt-1">NT$838.2</div>
+              <div id="unitTotalCostVal" class="text-xs text-zinc-400 mt-1">單件完整成本：NT$104.78</div>
+            </div>
+            <div class="apple-glass-subtle rounded-2xl p-4">
+              <div class="text-xs text-zinc-400">本批預估總營收</div>
+              <div id="batchRevenueVal" class="text-xl sm:text-2xl font-extrabold text-sky-400 font-mono mt-1">NT$1,920</div>
+              <div id="unitPriceVal" class="text-xs text-zinc-400 mt-1">單件目前售價：NT$240</div>
+            </div>
+            <div class="apple-glass-subtle rounded-2xl p-4">
+              <div class="text-xs text-zinc-400">本批預估毛利額 / 毛利率</div>
+              <div id="batchProfitVal" class="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono mt-1">+NT$1,081.8</div>
+              <div id="unitMarginVal" class="text-xs text-emerald-300 mt-1">預估毛利率：56.3%</div>
+            </div>
+          </div>
+
+          <!-- Detailed Cost Breakdown Table (Matches Sheet R31:R39) -->
+          <div class="overflow-x-auto rounded-2xl border border-white/10 p-3 bg-black/30">
+            <table class="w-full text-left border-collapse text-xs sm:text-sm">
+              <thead>
+                <tr class="border-b border-white/10 text-zinc-400">
+                  <th class="py-2 px-2 font-medium">成本結構項目</th>
+                  <th class="py-2 px-2 font-medium">計算標準</th>
+                  <th class="py-2 px-2 font-medium text-right">本批總額</th>
+                  <th class="py-2 px-2 font-medium text-right">單件分攤</th>
+                </tr>
+              </thead>
+              <tbody id="calcCostBreakdownBody" class="divide-y divide-white/5 font-mono">
+                <!-- Populated dynamically by JS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
         
         <!-- 4 Top KPI Cards (Matches 成本與定價總覽 R03:R05) -->
         <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
@@ -692,22 +692,33 @@
     <!-- iPhone / iPad Floating Bottom Glass Dock Navigation (Mobile-First Ergonomics) -->
     <nav class="md:hidden fixed bottom-3 left-3 right-3 z-40 apple-dock-glass rounded-3xl px-2 py-2" style="padding-bottom: calc(0.5rem + var(--safe-bottom));" aria-label="手機底部導覽列">
       <div class="grid grid-cols-4 gap-1">
-        <button type="button" data-tab="calculator" class="nav-tab-btn flex flex-col items-center justify-center py-1.5 rounded-2xl transition-all bg-white/15 text-amber-400 font-semibold">
-          <span class="text-base">⚖️</span>
-          <span class="text-[11px] mt-0.5">配方換算</span>
-        </button>
-        <button type="button" data-tab="recipes" class="nav-tab-btn flex flex-col items-center justify-center py-1.5 rounded-2xl transition-all text-zinc-400">
-          <span class="text-base">📖</span>
-          <span class="text-[11px] mt-0.5">配方排程</span>
-        </button>
-        <button type="button" data-tab="ingredients" class="nav-tab-btn flex flex-col items-center justify-center py-1.5 rounded-2xl transition-all text-zinc-400">
-          <span class="text-base">🌾</span>
-          <span class="text-[11px] mt-0.5">原料庫</span>
-        </button>
-        <button type="button" data-tab="pricing" class="nav-tab-btn flex flex-col items-center justify-center py-1.5 rounded-2xl transition-all text-zinc-400">
-          <span class="text-base">📊</span>
-          <span class="text-[11px] mt-0.5">成本定價</span>
-        </button>
+        <div class="relative">
+          <button type="button" data-tab="calculator" class="nav-tab-btn w-full flex flex-col items-center justify-center py-1.5 rounded-2xl transition-all bg-white/15 text-amber-400 font-semibold">
+            <span class="text-base">⚖️</span>
+            <span class="text-[11px] mt-0.5">配方換算</span>
+          </button>
+        </div>
+        <div class="relative">
+          <button type="button" data-tab="recipes" class="nav-tab-btn w-full flex flex-col items-center justify-center py-1.5 rounded-2xl transition-all text-zinc-400">
+            <span class="text-base">📖</span>
+            <span class="text-[11px] mt-0.5">配方排程</span>
+          </button>
+          <span class="lock-indicator absolute top-1 right-2 text-[9px] pointer-events-none">🔒</span>
+        </div>
+        <div class="relative">
+          <button type="button" data-tab="ingredients" class="nav-tab-btn w-full flex flex-col items-center justify-center py-1.5 rounded-2xl transition-all text-zinc-400">
+            <span class="text-base">🌾</span>
+            <span class="text-[11px] mt-0.5">原料庫</span>
+          </button>
+          <span class="lock-indicator absolute top-1 right-2 text-[9px] pointer-events-none">🔒</span>
+        </div>
+        <div class="relative">
+          <button type="button" data-tab="pricing" class="nav-tab-btn w-full flex flex-col items-center justify-center py-1.5 rounded-2xl transition-all text-zinc-400">
+            <span class="text-base">📊</span>
+            <span class="text-[11px] mt-0.5">成本定價</span>
+          </button>
+          <span class="lock-indicator absolute top-1 right-2 text-[9px] pointer-events-none">🔒</span>
+        </div>
       </div>
     </nav>
 
@@ -769,6 +780,46 @@ git push -u origin main</pre>
             <li>從主畫面點擊圖示開啟，即會自動隱藏網址列、支援安全區域（Dynamic Island）與深色毛玻璃全螢幕操作！</li>
           </ul>
         </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================= -->
+  <!-- MODAL: Apple iOS-Style Passcode Lock for Protected Tabs (Password 0410) -->
+  <!-- ======================================================================= -->
+  <div id="passcodeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl">
+    <div class="apple-glass rounded-3xl max-w-sm w-full p-6 sm:p-8 space-y-6 border border-white/20 text-center animate-spring">
+      <div class="flex justify-end">
+        <button type="button" id="closePasscodeModalBtn" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-zinc-300 text-sm">✕</button>
+      </div>
+      <div class="space-y-2 -mt-4">
+        <div class="w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center mx-auto text-2xl shadow-lg shadow-amber-500/15">
+          🔒
+        </div>
+        <h3 class="text-xl font-extrabold text-white">請輸入管理密碼</h3>
+        <p id="passcodeModalSubtitle" class="text-xs text-zinc-400">解鎖後即可瀏覽「經典配方與排程、原料資料庫、成本與定價總覽」</p>
+      </div>
+
+      <!-- 4-Digit Passcode Dots / Input Display -->
+      <div class="space-y-2">
+        <input type="password" id="passcodeInput" maxlength="4" inputmode="numeric" placeholder="••••" class="w-44 text-center text-3xl tracking-[0.5em] font-mono font-extrabold py-2.5 px-4 rounded-2xl bg-black/60 border border-white/20 text-amber-400 focus:outline-none focus:border-amber-400" />
+        <div id="passcodeErrorMsg" class="text-xs font-semibold text-rose-400 h-4"></div>
+      </div>
+
+      <!-- iOS-Style Touch Numeric Keypad -->
+      <div class="grid grid-cols-3 gap-3 max-w-[260px] mx-auto">
+        <button type="button" data-key="1" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">1</button>
+        <button type="button" data-key="2" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">2</button>
+        <button type="button" data-key="3" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">3</button>
+        <button type="button" data-key="4" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">4</button>
+        <button type="button" data-key="5" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">5</button>
+        <button type="button" data-key="6" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">6</button>
+        <button type="button" data-key="7" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">7</button>
+        <button type="button" data-key="8" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">8</button>
+        <button type="button" data-key="9" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">9</button>
+        <button type="button" id="passcodeClearBtn" class="h-14 rounded-2xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-zinc-400 active:scale-95">清除</button>
+        <button type="button" data-key="0" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">0</button>
+        <button type="button" id="passcodeSubmitBtn" class="h-14 rounded-2xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm active:scale-95 shadow-md shadow-amber-500/20">確認</button>
       </div>
     </div>
   </div>

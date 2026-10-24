@@ -82,10 +82,13 @@
     // =========================================================================
     // 2. APPLICATION STATE
     // =========================================================================
+    const PASSCODE = '0410';
     const state = {
       activeTab: 'calculator',
+      isUnlocked: false,       // 後三個分頁密碼鎖狀態 (密碼: 0410)
+      pendingTab: null,        // 等待密碼解鎖後切換的分頁
       selectedRecipeId: 'RCP-01',
-      targetPieces: 8,         // 本次欲製作麵包數量
+      targetPieces: 8,         // 本次欲製作麵包數量 (以整數進位)
       targetBatches: 1.0,      // 配方縮放倍率 (份數)
       weightUnit: 'g',         // 'g' | 'kg' | 'oz'
       selectedStage: 'ALL',
@@ -291,35 +294,35 @@
 
         const btn = document.createElement('button');
         btn.type = 'button';
-        btn.className = `card-interactive text-left rounded-2xl p-3.5 transition-all flex flex-col justify-between ${
+        btn.className = `card-interactive text-left rounded-3xl p-4 sm:p-5 transition-all flex flex-col justify-between min-h-[138px] sm:min-h-[152px] ${
           isSelected
-            ? 'bg-gradient-to-br from-amber-500/25 via-amber-500/10 to-transparent border-2 border-amber-400 shadow-lg shadow-amber-500/15'
+            ? 'bg-gradient-to-br from-amber-500/30 via-amber-500/15 to-transparent border-2 border-amber-400 shadow-xl shadow-amber-500/20 scale-[1.01]'
             : 'apple-glass-subtle hover:border-white/25'
         }`;
 
         btn.innerHTML = `
           <div class="flex items-center justify-between w-full">
-            <span class="text-xl">${emoji}</span>
-            <span class="text-[10px] font-mono px-2 py-0.5 rounded-full ${
-              isSelected ? 'bg-amber-400 text-black font-bold' : 'bg-white/10 text-zinc-400'
+            <span class="text-3xl sm:text-4xl">${emoji}</span>
+            <span class="text-xs font-mono px-2.5 py-1 rounded-full ${
+              isSelected ? 'bg-amber-400 text-black font-extrabold' : 'bg-white/10 text-zinc-300'
             }">${rcp.id}</span>
           </div>
-          <div class="mt-2">
-            <div class="font-bold text-sm text-white">${rcp.name}</div>
-            <div class="text-[11px] text-zinc-400 mt-0.5">
-              1 份做 <strong class="text-amber-300 font-mono">${rcp.baseYield} ${rcp.yieldUnit}</strong>
+          <div class="mt-3">
+            <div class="font-extrabold text-lg sm:text-xl text-white tracking-tight">${rcp.name}</div>
+            <div class="text-xs sm:text-sm text-zinc-300 mt-1">
+              1 份基準：<strong class="text-amber-300 font-mono font-bold">${rcp.baseYield} ${rcp.yieldUnit}</strong>
             </div>
           </div>
-          <div class="mt-2 pt-1.5 border-t border-white/10 flex items-center justify-between text-[10px] text-zinc-400">
-            <span>${rcp.items.length} 項原料</span>
-            <span class="font-mono text-zinc-300">${meta.sellingPriceUnit > 0 ? '$' + meta.sellingPriceUnit + '/' + rcp.yieldUnit : '自製酵種'}</span>
+          <div class="mt-3 pt-2 border-t border-white/10 flex items-center justify-between text-xs text-zinc-400">
+            <span>共 ${rcp.items.length} 項原料</span>
+            <span class="text-amber-300/90 font-semibold">${isSelected ? '● 已選中' : '點擊選擇 →'}</span>
           </div>
         `;
 
         btn.addEventListener('click', () => {
           state.selectedRecipeId = rcp.id;
-          state.targetPieces = rcp.baseYield;
-          state.targetBatches = 1.0;
+          state.targetPieces = Math.max(1, Math.ceil(rcp.baseYield));
+          state.targetBatches = state.targetPieces / rcp.baseYield;
           state.selectedStage = 'ALL';
           syncInputsAndRenderCalculator();
         });
@@ -334,25 +337,26 @@
       const base = recipe.baseYield;
       const unit = recipe.yieldUnit;
 
-      // Multipliers: 0.5x, 1x (Base), 1.5x, 2x, 3x, 4x
-      const multipliers = [0.5, 1, 1.5, 2, 3, 4];
+      // Multipliers: 0.5x, 1x (Base), 1.5x, 2x, 3x, 4x — pieces rounded up to integer (Math.ceil)
+      const multipliers = base === 1 ? [1, 2, 3, 4, 5, 6] : [0.5, 1, 1.5, 2, 3, 4];
       multipliers.forEach(mult => {
-        const pieces = Number((base * mult).toFixed(1));
-        const isActive = Math.abs(state.targetBatches - mult) < 0.02;
+        const pieces = Math.max(1, Math.ceil(base * mult));
+        const actualBatches = pieces / base;
+        const isActive = state.targetPieces === pieces;
         const chip = document.createElement('button');
         chip.type = 'button';
-        chip.className = `px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
+        chip.className = `px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all ${
           isActive
-            ? 'bg-amber-400 text-black font-bold shadow-md shadow-amber-500/20'
+            ? 'bg-amber-400 text-black font-extrabold shadow-md shadow-amber-500/20'
             : 'apple-glass-pill text-zinc-200 hover:text-white'
         }`;
-        chip.textContent = mult === 1
+        chip.textContent = pieces === base
           ? `1 份基準 (${pieces}${unit})`
-          : `${mult} 份 (${pieces}${unit})`;
+          : `${pieces} ${unit} (${Number(actualBatches.toFixed(2))}份)`;
 
         chip.addEventListener('click', () => {
-          state.targetBatches = mult;
-          state.targetPieces = Number((base * mult).toFixed(2));
+          state.targetPieces = pieces;
+          state.targetBatches = pieces / base;
           syncInputsAndRenderCalculator();
         });
         container.appendChild(chip);
@@ -380,25 +384,29 @@
 
       // Update Hero active summary
       document.getElementById('heroActiveSummary').textContent =
-        `${recipe.name} ${Number(state.targetPieces.toFixed(1))} ${recipe.yieldUnit} (${Number(scale.toFixed(2))}份)`;
+        `${recipe.name} ${Math.round(state.targetPieces)} ${recipe.yieldUnit} (${Number(scale.toFixed(2))}份)`;
+      const batchTargetLbl = document.getElementById('pricingBatchTargetLabel');
+      if (batchTargetLbl) {
+        batchTargetLbl.textContent = `目前核算目標：${recipe.name} × ${Math.round(state.targetPieces)} ${recipe.yieldUnit} (${Number(scale.toFixed(2))} 份)`;
+      }
 
       // Update Left Header
-      document.getElementById('calcRecipeTitle').textContent = `${meta.displayEmoji || meta.emoji} ${recipe.name} (${recipe.id})`;
+      document.getElementById('calcRecipeTitle').textContent = `${meta.displayEmoji || meta.emoji} ${recipe.name}`;
       document.getElementById('calcRecipeMeta').textContent =
         `試算表基準：1 份可做 ${recipe.baseYield} ${recipe.yieldUnit} • ${meta.panSpec}`;
       document.getElementById('calcScaleBadge').textContent = `${Number(scale.toFixed(2))} 份 (${Number(scale.toFixed(2))}x)`;
       document.getElementById('targetPiecesUnitLabel').textContent = `單位：${recipe.yieldUnit}`;
       document.getElementById('baseYieldHint').innerHTML =
-        `試算表 1 份基準產量：<strong class="text-zinc-200">${recipe.baseYield} ${recipe.yieldUnit}</strong>`;
+        `試算表 1 份基準產量：<strong class="text-amber-300 font-bold">${recipe.baseYield} ${recipe.yieldUnit}</strong>`;
 
-      // Update Slider max & text
+      // Update Slider max & text (always step=1 integer)
       const slider = document.getElementById('piecesSlider');
       const maxSlider = Math.max(Math.round(recipe.baseYield * 5), 20);
       slider.max = maxSlider;
-      slider.step = recipe.baseYield === 1 ? 0.5 : 1;
-      slider.value = Math.min(state.targetPieces, maxSlider);
+      slider.step = 1;
+      slider.value = Math.min(Math.round(state.targetPieces), maxSlider);
       document.getElementById('sliderValueText').textContent =
-        `目前：${Number(state.targetPieces.toFixed(1))} ${recipe.yieldUnit} (${Number(scale.toFixed(2))} 份)`;
+        `目前：${Math.round(state.targetPieces)} ${recipe.yieldUnit} (${Number(scale.toFixed(2))} 份)`;
 
       renderQuickPresets(recipe);
       renderReverseScaleDropdown(metrics);
@@ -418,17 +426,17 @@
       keyItems.forEach(kItem => {
         const isButter = kItem.rawIngredient.includes('奶油');
         const card = document.createElement('div');
-        card.className = 'p-3 rounded-2xl bg-black/45 border border-white/10 flex flex-col justify-between';
+        card.className = 'p-3.5 sm:p-4 rounded-2xl bg-black/50 border border-white/15 flex flex-col justify-between';
         card.innerHTML = `
-          <div class="flex items-center justify-between text-[11px] text-zinc-400">
+          <div class="flex items-center justify-between text-xs text-zinc-300 font-medium">
             <span class="truncate pr-1">${isButter ? '🧈' : '🌾'} ${kItem.ingredient}</span>
-            <span class="text-[10px] text-zinc-500 shrink-0">${kItem.stage}</span>
+            <span class="text-[11px] text-zinc-400 shrink-0">${kItem.stage}</span>
           </div>
-          <div class="mt-1 flex items-baseline justify-between">
-            <span class="text-lg sm:text-xl font-extrabold font-mono ${isButter ? 'text-amber-300' : 'text-white'}">
+          <div class="mt-1.5 flex items-baseline justify-between">
+            <span class="text-xl sm:text-2xl font-extrabold font-mono ${isButter ? 'text-amber-300' : 'text-white'}">
               ${formatWeight(kItem.scaledQty, kItem.unit)}
             </span>
-            <span class="text-[10px] text-zinc-400 font-mono">1份: ${kItem.baseQty}${kItem.unit}</span>
+            <span class="text-xs text-zinc-400 font-mono">1份: ${kItem.baseQty}${kItem.unit}</span>
           </div>
         `;
         keyContainer.appendChild(card);
@@ -571,47 +579,46 @@
         const isKeyFlourOrButter = item.rawIngredient.includes('麵粉') || item.rawIngredient.includes('奶油');
 
         const row = document.createElement('div');
-        row.className = `card-interactive rounded-2xl p-3.5 sm:px-4 sm:py-3.5 border transition-all cursor-pointer flex items-center justify-between gap-3 ${
+        row.className = `card-interactive rounded-3xl p-4 sm:px-6 sm:py-5 border transition-all cursor-pointer flex items-center justify-between gap-4 ${
           isChecked
-            ? 'bg-emerald-950/25 border-emerald-500/30 opacity-65'
+            ? 'bg-emerald-950/25 border-emerald-500/35 opacity-65'
             : isKeyFlourOrButter
-              ? 'bg-white/[0.05] border-amber-500/25'
-              : 'apple-glass-subtle border-white/10'
+              ? 'bg-white/[0.06] border-amber-500/35 shadow-md shadow-amber-500/5'
+              : 'apple-glass-subtle border-white/15'
         }`;
 
         row.innerHTML = `
-          <div class="flex items-center gap-3 min-w-0">
-            <div class="w-6 h-6 rounded-lg flex items-center justify-center border transition-all shrink-0 ${
+          <div class="flex items-center gap-3.5 sm:gap-4 min-w-0">
+            <div class="w-8 h-8 rounded-xl flex items-center justify-center border-2 transition-all shrink-0 ${
               isChecked
-                ? 'bg-emerald-500 border-emerald-400 text-black font-bold text-xs'
-                : 'border-white/25 bg-black/40 text-transparent'
+                ? 'bg-emerald-500 border-emerald-400 text-black font-extrabold text-base'
+                : 'border-white/30 bg-black/40 text-transparent'
             }">✓</div>
             <div class="min-w-0">
-              <div class="flex items-center gap-2 flex-wrap">
-                <span class="ing-title font-bold text-sm sm:text-base ${isChecked ? 'line-through text-zinc-400' : 'text-white'}">
+              <div class="flex items-center gap-2.5 flex-wrap">
+                <span class="ing-title font-extrabold text-lg sm:text-2xl tracking-tight ${isChecked ? 'line-through text-zinc-400' : 'text-white'}">
                   ${item.ingredient}
                 </span>
-                <span class="text-[10px] px-2 py-0.5 rounded-full bg-white/10 text-zinc-300">${item.stage}</span>
-                ${isKeyFlourOrButter ? '<span class="text-[10px] px-2 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-medium">核心比例</span>' : ''}
+                <span class="text-xs px-2.5 py-0.5 rounded-full bg-white/10 text-zinc-200 font-medium">${item.stage}</span>
+                ${isKeyFlourOrButter ? '<span class="text-xs px-2.5 py-0.5 rounded-full bg-amber-500/20 text-amber-300 font-bold">核心原料</span>' : ''}
               </div>
-              <div class="text-[11px] text-zinc-400 mt-0.5 flex items-center gap-3 flex-wrap font-mono">
-                <span>1份基準: ${item.baseQty} ${item.unit}</span>
-                <span>•</span>
-                <span>烘焙比: ${item.bakersPct.toFixed(1)}%</span>
-                <span>•</span>
-                <span>單價: $${item.unitCost.toFixed(3)}/${item.unit}</span>
+              <div class="text-xs sm:text-sm text-zinc-300 mt-1.5 flex items-center gap-3 flex-wrap font-mono">
+                <span class="px-2.5 py-0.5 rounded-lg bg-sky-500/15 text-sky-300 border border-sky-400/25 font-bold">
+                  烘焙比例 ${item.bakersPct.toFixed(1)}%
+                </span>
+                <span class="text-zinc-400">1 份基準：${item.baseQty} ${item.unit}</span>
               </div>
             </div>
           </div>
 
           <div class="text-right shrink-0">
-            <div class="weight-num text-lg sm:text-2xl font-extrabold font-mono ${
+            <div class="weight-num text-2xl sm:text-4xl font-extrabold font-mono tracking-tight ${
               isChecked ? 'text-emerald-400' : 'text-amber-400'
             }">
               ${formatWeight(item.scaledQty, item.unit)}
             </div>
-            <div class="text-[11px] text-zinc-400 font-mono">
-              小計 ${formatCurrency(item.itemCost, 1)}
+            <div class="text-xs sm:text-sm text-zinc-400 font-mono mt-0.5">
+              ${Number(scale.toFixed(2))}x 倍率重量
             </div>
           </div>
         `;
@@ -626,9 +633,12 @@
     }
 
     function syncInputsAndRenderCalculator() {
+      const rcp = getRecipeById(state.selectedRecipeId);
+      state.targetPieces = Math.max(1, Math.ceil(state.targetPieces));
+      state.targetBatches = state.targetPieces / rcp.baseYield;
       const pInput = document.getElementById('targetPiecesInput');
       const bInput = document.getElementById('targetBatchesInput');
-      pInput.value = Number(state.targetPieces.toFixed(2));
+      pInput.value = Math.round(state.targetPieces);
       bInput.value = Number(state.targetBatches.toFixed(2));
       renderRecipeSelectorCards();
       renderCalculator();
@@ -1154,7 +1164,46 @@
     // =========================================================================
     // 8. TAB NAVIGATION & EVENT LISTENERS
     // =========================================================================
+    function openPasscodeModal(targetTab) {
+      state.pendingTab = targetTab;
+      const modal = document.getElementById('passcodeModal');
+      const inp = document.getElementById('passcodeInput');
+      const err = document.getElementById('passcodeErrorMsg');
+      inp.value = '';
+      err.textContent = '';
+      modal.classList.remove('hidden');
+      setTimeout(() => inp.focus(), 80);
+    }
+
+    function verifyPasscode() {
+      const inp = document.getElementById('passcodeInput');
+      const err = document.getElementById('passcodeErrorMsg');
+      if (inp.value === PASSCODE) {
+        state.isUnlocked = true;
+        document.getElementById('passcodeModal').classList.add('hidden');
+        document.querySelectorAll('.lock-indicator').forEach(el => {
+          el.textContent = '🔓';
+        });
+        showToast('密碼驗證成功！已解鎖進階分頁', '🔓');
+        if (state.pendingTab) {
+          const target = state.pendingTab;
+          state.pendingTab = null;
+          switchTab(target);
+        }
+      } else {
+        err.textContent = '密碼錯誤，請輸入正確密碼';
+        inp.value = '';
+        inp.focus();
+      }
+    }
+
     function switchTab(tabName) {
+      // Protect tabs 2, 3, 4 with password (0410)
+      if (tabName !== 'calculator' && !state.isUnlocked) {
+        openPasscodeModal(tabName);
+        return;
+      }
+
       state.activeTab = tabName;
       document.querySelectorAll('.tab-panel').forEach(panel => {
         panel.classList.add('hidden');
@@ -1166,7 +1215,7 @@
       document.querySelectorAll('.nav-tab-btn').forEach(btn => {
         const isMatch = btn.getAttribute('data-tab') === tabName;
         if (btn.closest('header')) {
-          btn.className = `nav-tab-btn px-4 py-1.5 rounded-full text-xs font-medium transition-all ${
+          btn.className = `nav-tab-btn px-4 py-1.5 rounded-full text-xs font-medium transition-all flex items-center gap-1 ${
             isMatch ? 'bg-white text-black shadow-sm font-semibold' : 'text-zinc-300 hover:text-white'
           }`;
         } else {
@@ -1189,68 +1238,130 @@
         });
       });
 
-      // Pieces & Batches Dual Sync Controls
+      // Jump back to calculator button from Tab 4
+      const jumpBackBtn = document.getElementById('jumpBackToCalcBtn');
+      if (jumpBackBtn) {
+        jumpBackBtn.addEventListener('click', () => {
+          switchTab('calculator');
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+      }
+
+      // Passcode Modal Events
+      const passModal = document.getElementById('passcodeModal');
+      const passInput = document.getElementById('passcodeInput');
+      document.getElementById('closePasscodeModalBtn').addEventListener('click', () => {
+        passModal.classList.add('hidden');
+        state.pendingTab = null;
+      });
+      passModal.addEventListener('click', (e) => {
+        if (e.target === passModal) {
+          passModal.classList.add('hidden');
+          state.pendingTab = null;
+        }
+      });
+      document.querySelectorAll('.passcode-key').forEach(btn => {
+        btn.addEventListener('click', () => {
+          if (passInput.value.length < 4) {
+            passInput.value += btn.getAttribute('data-key');
+            document.getElementById('passcodeErrorMsg').textContent = '';
+            if (passInput.value.length === 4) {
+              verifyPasscode();
+            }
+          }
+        });
+      });
+      document.getElementById('passcodeClearBtn').addEventListener('click', () => {
+        passInput.value = '';
+        document.getElementById('passcodeErrorMsg').textContent = '';
+        passInput.focus();
+      });
+      document.getElementById('passcodeSubmitBtn').addEventListener('click', () => {
+        verifyPasscode();
+      });
+      passInput.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          verifyPasscode();
+        }
+      });
+      passInput.addEventListener('input', () => {
+        if (passInput.value.length === 4) {
+          verifyPasscode();
+        }
+      });
+
+      // Pieces & Batches Dual Sync Controls (Pieces always integer rounded up via Math.ceil)
       const pInput = document.getElementById('targetPiecesInput');
       const bInput = document.getElementById('targetBatchesInput');
       const slider = document.getElementById('piecesSlider');
 
       pInput.addEventListener('input', () => {
         const rcp = getRecipeById(state.selectedRecipeId);
-        const val = Math.max(0.1, parseFloat(pInput.value) || 0.1);
-        state.targetPieces = val;
-        state.targetBatches = val / rcp.baseYield;
-        bInput.value = Number(state.targetBatches.toFixed(2));
-        renderCalculator();
+        const rawVal = parseFloat(pInput.value);
+        if (!isNaN(rawVal) && rawVal > 0) {
+          const intPieces = Math.max(1, Math.ceil(rawVal));
+          state.targetPieces = intPieces;
+          state.targetBatches = intPieces / rcp.baseYield;
+          bInput.value = Number(state.targetBatches.toFixed(2));
+          renderCalculator();
+        }
       });
 
-      bInput.addEventListener('input', () => {
+      pInput.addEventListener('change', () => {
+        syncInputsAndRenderCalculator();
+      });
+
+      bInput.addEventListener('change', () => {
         const rcp = getRecipeById(state.selectedRecipeId);
-        const batchVal = Math.max(0.05, parseFloat(bInput.value) || 0.05);
-        state.targetBatches = batchVal;
-        state.targetPieces = batchVal * rcp.baseYield;
-        pInput.value = Number(state.targetPieces.toFixed(2));
-        renderCalculator();
+        const batchVal = Math.max(0.1, parseFloat(bInput.value) || 0.1);
+        const intPieces = Math.max(1, Math.ceil(batchVal * rcp.baseYield));
+        state.targetPieces = intPieces;
+        state.targetBatches = intPieces / rcp.baseYield;
+        syncInputsAndRenderCalculator();
       });
 
       slider.addEventListener('input', () => {
         const rcp = getRecipeById(state.selectedRecipeId);
-        const val = parseFloat(slider.value) || 1;
-        state.targetPieces = val;
-        state.targetBatches = val / rcp.baseYield;
+        const intPieces = Math.max(1, Math.ceil(parseFloat(slider.value) || 1));
+        state.targetPieces = intPieces;
+        state.targetBatches = intPieces / rcp.baseYield;
         syncInputsAndRenderCalculator();
       });
 
       document.getElementById('decPiecesBtn').addEventListener('click', () => {
         const rcp = getRecipeById(state.selectedRecipeId);
-        const step = rcp.baseYield === 1 ? 0.5 : 1;
-        state.targetPieces = Math.max(step, Number((state.targetPieces - step).toFixed(2)));
+        state.targetPieces = Math.max(1, Math.ceil(state.targetPieces) - 1);
         state.targetBatches = state.targetPieces / rcp.baseYield;
         syncInputsAndRenderCalculator();
       });
 
       document.getElementById('incPiecesBtn').addEventListener('click', () => {
         const rcp = getRecipeById(state.selectedRecipeId);
-        const step = rcp.baseYield === 1 ? 0.5 : 1;
-        state.targetPieces = Number((state.targetPieces + step).toFixed(2));
+        state.targetPieces = Math.max(1, Math.ceil(state.targetPieces) + 1);
         state.targetBatches = state.targetPieces / rcp.baseYield;
         syncInputsAndRenderCalculator();
       });
 
       document.getElementById('decBatchBtn').addEventListener('click', () => {
         const rcp = getRecipeById(state.selectedRecipeId);
-        state.targetBatches = Math.max(0.25, Number((state.targetBatches - 0.5).toFixed(2)));
-        state.targetPieces = state.targetBatches * rcp.baseYield;
+        const nextBatch = Math.max(0.25, state.targetBatches - 0.5);
+        const intPieces = Math.max(1, Math.ceil(nextBatch * rcp.baseYield));
+        state.targetPieces = intPieces;
+        state.targetBatches = intPieces / rcp.baseYield;
         syncInputsAndRenderCalculator();
       });
 
       document.getElementById('incBatchBtn').addEventListener('click', () => {
         const rcp = getRecipeById(state.selectedRecipeId);
-        state.targetBatches = Number((state.targetBatches + 0.5).toFixed(2));
-        state.targetPieces = state.targetBatches * rcp.baseYield;
+        const nextBatch = state.targetBatches + 0.5;
+        const intPieces = Math.max(1, Math.ceil(nextBatch * rcp.baseYield));
+        state.targetPieces = intPieces;
+        state.targetBatches = intPieces / rcp.baseYield;
         syncInputsAndRenderCalculator();
       });
 
-      // Reverse Scale by Available Ingredient Weight
+      // Reverse Scale by Available Ingredient Weight (Integer rounded up)
       document.getElementById('openReverseScaleBtn').addEventListener('click', () => {
         document.getElementById('reverseScaleDrawer').classList.toggle('hidden');
       });
@@ -1267,11 +1378,12 @@
         }
         const item = rcp.items[idx];
         if (item && item.baseQty > 0) {
-          const newScale = grams / item.baseQty;
-          state.targetBatches = newScale;
-          state.targetPieces = newScale * rcp.baseYield;
+          const rawScale = grams / item.baseQty;
+          const intPieces = Math.max(1, Math.ceil(rawScale * rcp.baseYield));
+          state.targetPieces = intPieces;
+          state.targetBatches = intPieces / rcp.baseYield;
           syncInputsAndRenderCalculator();
-          showToast(`已依「${item.ingredient} ${grams}${item.unit}」反推為 ${newScale.toFixed(2)} 份 (${state.targetPieces.toFixed(1)} ${rcp.yieldUnit})`);
+          showToast(`已依「${item.ingredient} ${grams}${item.unit}」整數進位反推為 ${intPieces} ${rcp.yieldUnit} (${state.targetBatches.toFixed(2)} 份)`);
         }
       });
 
@@ -1319,11 +1431,11 @@
           `🥐 【Jasmine's Bakery 動態配方單】`,
           `品項：${m.recipe.name} (${m.recipe.id})`,
           `本次製作數量：${Number(m.targetPieces.toFixed(1))} ${m.recipe.yieldUnit} (${Number(m.scale.toFixed(2))} 份)`,
-          `本批麵團總重：${Math.round(m.totalWeightG)} g | 食材成本：NT$${m.totalFoodCost.toFixed(1)}`,
+          `本批麵團總重：${Math.round(m.totalWeightG)} g`,
           `----------------------------------------`
         ];
         m.scaledItems.forEach(it => {
-          lines.push(`• [${it.stage}] ${it.ingredient}：${formatWeight(it.scaledQty, it.unit)} (成本 $${it.itemCost.toFixed(1)})`);
+          lines.push(`• [${it.stage}] ${it.ingredient}：${formatWeight(it.scaledQty, it.unit)} (烘焙比例 ${it.bakersPct.toFixed(1)}%)`);
         });
         copyTextToClipboard(lines.join('\n'), '已複製本批配方克數清單！');
       });
