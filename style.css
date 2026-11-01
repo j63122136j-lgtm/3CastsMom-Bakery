@@ -104,10 +104,18 @@
       border-radius: 36px !important;
       overflow-x: hidden;
     }
-    /* Extra-Large Kitchen Font Mode */
-    .kitchen-mode .weight-num {
-      font-size: 1.35rem !important;
+    /* Large Recipe Font by Default */
+    .weight-num {
+      font-size: 1.15rem;
+      line-height: 1.35rem;
     }
-    .kitchen-mode .ing-title {
-      font-size: 1rem !important;
+    @media (min-width: 640px) {
+      .weight-num {
+        font-size: 1.3rem;
+        line-height: 1.5rem;
+      }
+    }
+    .ing-title {
+      font-size: 0.95rem;
+      line-height: 1.25rem;
     }

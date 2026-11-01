@@ -391,15 +391,15 @@
               isChecked ? 'bg-emerald-500 border-emerald-400 text-black font-black' : 'border-white/30 text-transparent'
             }">✓</span>
             <div class="min-w-0">
-              <div class="ing-title font-bold text-xs sm:text-sm text-white truncate leading-tight ${isChecked ? 'line-through text-zinc-400' : ''}">
+              <div class="ing-title font-extrabold text-sm sm:text-base text-white truncate leading-snug ${isChecked ? 'line-through text-zinc-400' : ''}">
                 ${item.ingredient}
               </div>
-              <div class="text-[9px] text-zinc-400 truncate">${item.stage || ''}</div>
+              <div class="text-[10px] sm:text-xs text-zinc-400 truncate">${item.stage || ''}</div>
             </div>
           </div>
 
           <div class="text-right shrink-0">
-            <div class="weight-num text-sm sm:text-base font-black font-mono ${
+            <div class="weight-num text-base sm:text-xl font-black font-mono tracking-tight ${
               isChecked ? 'text-emerald-400' : 'text-amber-400'
             }">
               ${formatWeight(item.scaledQty, item.unit)}
@@ -923,9 +923,9 @@
       document.querySelectorAll('.nav-tab-btn').forEach(btn => {
         const isMatch = btn.getAttribute('data-tab') === tabName;
         if (isMatch) {
-          btn.className = `nav-tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-white text-black shadow-sm flex items-center justify-center gap-1 whitespace-nowrap`;
+          btn.className = `nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-black transition-all bg-white text-black shadow-sm flex items-center justify-center gap-0.5 whitespace-nowrap`;
         } else {
-          btn.className = `nav-tab-btn px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center justify-center gap-1 whitespace-nowrap`;
+          btn.className = `nav-tab-btn px-1.5 sm:px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold transition-all text-zinc-300 hover:text-white flex items-center justify-center gap-0.5 whitespace-nowrap`;
         }
       });
 
@@ -1087,16 +1087,7 @@
         showToast('已還原原料採購價');
       });
 
-      // Kitchen Big Font Mode
-      const kmBtn = document.getElementById('kitchenModeBtn');
-      if (kmBtn) {
-        kmBtn.addEventListener('click', () => {
-          state.kitchenMode = !state.kitchenMode;
-          document.body.classList.toggle('kitchen-mode', state.kitchenMode);
-          kmBtn.classList.toggle('bg-amber-500/30', state.kitchenMode);
-          showToast(state.kitchenMode ? '大字秤重已開啟' : '標準大小', '🧑‍🍳');
-        });
-      }
+// Large font enabled by default per user request; chef symbol removed
 
       // GitHub Modal
       const ghModal = document.getElementById('githubModal');
