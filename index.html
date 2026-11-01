@@ -51,7 +51,7 @@
   <!-- Main App Wrapper -->
   <div id="appFrameWrapper" class="relative z-10 w-full transition-all duration-300">
 
-    <!-- Sticky Apple Top Navigation Bar (Mobile-Fit, Compact Typography) -->
+        <!-- Sticky Apple Top Navigation Bar (Mobile-Fit, Compact Typography) -->
     <header class="sticky top-0 z-40 apple-nav-glass px-2.5 sm:px-6 lg:px-10 pb-2" style="padding-top: calc(env(safe-area-inset-top, 0px) + 0.35rem);">
       <div class="max-w-7xl mx-auto flex items-center justify-between gap-1 sm:gap-3">
         <!-- Big Brand Title: 🐈 3CatsMomBakery (一隻橘貓) -->
@@ -62,33 +62,32 @@
           </h1>
         </div>
 
-        <!-- The 3 Requested Tabs: Compact & Responsive -->
+        <!-- The 3 Simplified Tabs: 配方計算 + 原物料 + 成本總覽 -->
         <nav class="flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-full bg-white/[0.08] border border-white/12 shrink min-w-0" aria-label="主要導覽">
-          <button type="button" data-tab="calculator" class="nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-black transition-all bg-white text-black shadow-sm whitespace-nowrap">
-            <span class="hidden sm:inline">⚖️ </span>配方計算器
+          <button type="button" data-tab="calculator" class="nav-tab-btn px-2.5 sm:px-3.5 py-1 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-white text-black shadow-sm whitespace-nowrap">
+            配方計算
           </button>
           <div class="flex items-center">
-            <button type="button" data-tab="ingredients" class="nav-tab-btn px-1.5 sm:px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold transition-all text-zinc-300 hover:text-white flex items-center gap-0.5 whitespace-nowrap">
-              <span class="hidden sm:inline">🌾 </span><span>原物料資料庫</span>
+            <button type="button" data-tab="ingredients" class="nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center gap-0.5 whitespace-nowrap">
+              <span>原物料</span>
               <span class="lock-indicator text-[9px] text-amber-400">🔒</span>
             </button>
           </div>
           <div class="flex items-center">
-            <button type="button" data-tab="pricing" class="nav-tab-btn px-1.5 sm:px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold transition-all text-zinc-300 hover:text-white flex items-center gap-0.5 whitespace-nowrap">
-              <span class="hidden sm:inline">📊 </span><span>成本總攬</span>
+            <button type="button" data-tab="pricing" class="nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center gap-0.5 whitespace-nowrap">
+              <span>成本總覽</span>
               <span class="lock-indicator text-[9px] text-amber-400">🔒</span>
             </button>
           </div>
         </nav>
 
-        <!-- Quick Tools (Google Sheet & GitHub Icon) -->
-        <div class="flex items-center gap-1 shrink-0">
-          <a href="https://docs.google.com/spreadsheets/d/1jDieeGiKFCe8vaAAr6H7entZuC3gUYEQCYz-O3LkZuo/edit?gid=2001#gid=2001" target="_blank" rel="noopener noreferrer" class="apple-glass-pill px-1.5 sm:px-2 py-0.5 sm:py-1 rounded-full text-[10px] sm:text-xs font-bold text-amber-300 hover:text-white flex items-center gap-0.5" title="開啟 Google 試算表">
-            <span>📊</span>
-            <span class="hidden sm:inline">試算表</span>
+        <!-- Quick Tools (Google Sheets Icon & GitHub Icon) -->
+        <div class="flex items-center gap-1 sm:gap-1.5 shrink-0">
+          <a href="https://docs.google.com/spreadsheets/d/1jDieeGiKFCe8vaAAr6H7entZuC3gUYEQCYz-O3LkZuo/edit?gid=2001#gid=2001" target="_blank" rel="noopener noreferrer" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full apple-glass-pill hover:bg-white/15 active:scale-95 transition-all flex items-center justify-center shrink-0" title="開啟 Google 試算表 (gid=2001)" aria-label="Google 試算表">
+            <img src="data:image/png;base64,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" class="w-4 h-4 sm:w-5 sm:h-5 rounded object-contain" alt="Google 試算表" />
           </a>
-          <button type="button" id="openGithubModalBtn" class="w-6 h-6 sm:w-7 sm:h-7 rounded-full apple-glass-pill text-zinc-300 hover:text-white hover:bg-white/15 active:scale-95 transition-all flex items-center justify-center shrink-0" title="GitHub 部署指南" aria-label="GitHub 部署">
-            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          <button type="button" id="openGithubModalBtn" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full apple-glass-pill text-zinc-300 hover:text-white hover:bg-white/15 active:scale-95 transition-all flex items-center justify-center shrink-0" title="GitHub 部署指南" aria-label="GitHub 部署">
+            <svg class="w-3.5 h-3.5 sm:w-4 sm:h-4 fill-current" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
           </button>
         </div>
       </div>
@@ -124,22 +123,27 @@
             </div>
           </div>
 
-          <!-- Integrated Target Quantity Stepper Row -->
-          <div class="flex items-center justify-between gap-2 pt-1.5 border-t border-white/10 bg-black/40 rounded-xl px-3 py-1.5">
-            <div class="min-w-0 flex items-center gap-2">
-              <span class="text-xs text-zinc-400 shrink-0">選中:</span>
-              <div id="calcRecipeTitle" class="font-black text-xs sm:text-sm text-white whitespace-nowrap">🍞 生吐司</div>
-              <div id="calcRecipeMeta" class="text-[11px] text-zinc-400 shrink-0 hidden sm:block">基準 1 份：8 條</div>
+          <!-- Clean Presets & Stepper Controls Row (Zero Stacking / Zero Overlap) -->
+          <div class="flex items-center justify-between gap-2 pt-1.5 border-t border-white/10 bg-black/40 rounded-xl px-2.5 sm:px-3 py-1.5">
+            <!-- Left: Batch Presets (0.5份, 1份, 2份, 3份) -->
+            <div class="flex items-center gap-1.5 min-w-0 shrink-0">
+              <span class="text-xs text-zinc-400 font-bold hidden sm:inline">份數:</span>
+              <div id="quickPresetsContainer" class="flex items-center gap-1 overflow-x-auto no-scrollbar"></div>
             </div>
 
-            <!-- Stepper: − [ targetPieces ] + unit -->
+            <!-- Right: Stepper: − [ targetPieces ] + unit -->
             <div class="flex items-center gap-1.5 shrink-0">
-              <div id="quickPresetsContainer" class="flex items-center gap-1 overflow-x-auto no-scrollbar mr-1"></div>
               <span class="text-xs text-zinc-300 font-bold">本次製作:</span>
               <button type="button" id="decPiecesBtn" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 text-white font-extrabold text-base flex items-center justify-center transition-all">−</button>
               <input type="number" id="targetPiecesInput" value="8" min="1" step="1" class="w-14 text-center bg-black/70 border border-amber-400/60 rounded-lg text-lg font-black text-amber-400 focus:outline-none font-mono py-0.5" />
               <button type="button" id="incPiecesBtn" class="w-8 h-8 rounded-lg bg-amber-500 hover:bg-amber-400 active:scale-95 text-black font-extrabold text-base flex items-center justify-center shadow-sm shadow-amber-500/25 transition-all">+</button>
               <span id="targetPiecesUnitLabel" class="text-xs font-extrabold text-amber-400">條</span>
+            </div>
+
+            <!-- Hidden elements preserved for JS lookups without cluttering mobile view -->
+            <div class="hidden">
+              <div id="calcRecipeTitle"></div>
+              <div id="calcRecipeMeta"></div>
             </div>
           </div>
 

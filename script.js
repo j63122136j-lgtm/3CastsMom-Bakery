@@ -921,9 +921,9 @@
       document.querySelectorAll('.nav-tab-btn').forEach(btn => {
         const isMatch = btn.getAttribute('data-tab') === tabName;
         if (isMatch) {
-          btn.className = `nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-black transition-all bg-white text-black shadow-sm flex items-center justify-center gap-0.5 whitespace-nowrap`;
+          btn.className = `nav-tab-btn px-2.5 sm:px-3.5 py-1 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-white text-black shadow-sm flex items-center justify-center gap-0.5 whitespace-nowrap`;
         } else {
-          btn.className = `nav-tab-btn px-1.5 sm:px-2.5 py-1 rounded-full text-[10px] sm:text-xs font-semibold transition-all text-zinc-300 hover:text-white flex items-center justify-center gap-0.5 whitespace-nowrap`;
+          btn.className = `nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center justify-center gap-0.5 whitespace-nowrap`;
         }
       });
 
