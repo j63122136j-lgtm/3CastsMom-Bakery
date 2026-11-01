@@ -1,6 +1,5 @@
 /* 3CatsMomBakery | Apple Dark Mode & Glassmorphism Stylesheet */
-/* Jasmine's Bakery Studio — Version v2.2.0 Apple Dark Mode & Glassmorphism */
-    :root {
+:root {
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
     }
@@ -16,18 +15,26 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
+    /* Hide scrollbars for smooth horizontal scrolling */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
     /* Apple Glassmorphism */
     .apple-glass {
-      background: rgba(26, 26, 32, 0.72);
-      backdrop-filter: blur(28px) saturate(190%);
-      -webkit-backdrop-filter: blur(28px) saturate(190%);
+      background: rgba(26, 26, 32, 0.75);
+      backdrop-filter: blur(24px) saturate(190%);
+      -webkit-backdrop-filter: blur(24px) saturate(190%);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.7), inset 0 1px 0 0 rgba(255, 255, 255, 0.12);
+      box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
     }
     .apple-glass-subtle {
-      background: rgba(36, 36, 44, 0.52);
-      backdrop-filter: blur(20px) saturate(160%);
-      -webkit-backdrop-filter: blur(20px) saturate(160%);
+      background: rgba(36, 36, 44, 0.55);
+      backdrop-filter: blur(18px) saturate(160%);
+      -webkit-backdrop-filter: blur(18px) saturate(160%);
       border: 1px solid rgba(255, 255, 255, 0.09);
     }
     .apple-glass-pill {
@@ -35,85 +42,45 @@
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border: 1px solid rgba(255, 255, 255, 0.12);
-      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .apple-glass-pill:hover, .apple-glass-pill:active {
-      background: rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.16);
       transform: scale(1.02);
     }
     .apple-nav-glass {
-      background: rgba(12, 12, 16, 0.82);
-      backdrop-filter: blur(30px) saturate(200%);
-      -webkit-backdrop-filter: blur(30px) saturate(200%);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.09);
+      background: rgba(12, 12, 16, 0.88);
+      backdrop-filter: blur(28px) saturate(200%);
+      -webkit-backdrop-filter: blur(28px) saturate(200%);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     }
     .apple-dock-glass {
-      background: rgba(20, 20, 26, 0.86);
+      background: rgba(20, 20, 26, 0.88);
       backdrop-filter: blur(32px) saturate(200%);
       -webkit-backdrop-filter: blur(32px) saturate(200%);
       border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 24px 48px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
     }
-    /* Apple Keynote Gradient Text */
     .text-gradient-gold {
       background: linear-gradient(135deg, #FFF6E5 0%, #FFD60A 45%, #FF9F0A 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .text-gradient-silver {
-      background: linear-gradient(180deg, #FFFFFF 0%, #A1A1AA 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
     /* Smooth Spring Animations */
     @keyframes fadeUpSpring {
-      0% { opacity: 0; transform: translateY(18px) scale(0.985); }
+      0% { opacity: 0; transform: translateY(10px) scale(0.99); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
-    @keyframes pulseGlow {
-      0%, 100% { opacity: 0.45; transform: scale(1); }
-      50% { opacity: 0.75; transform: scale(1.06); }
-    }
     .animate-spring {
-      animation: fadeUpSpring 0.55s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeUpSpring 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     .card-interactive {
-      transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease, box-shadow 0.32s ease;
-    }
-    .card-interactive:hover {
-      transform: translateY(-2px);
-      border-color: rgba(255, 159, 10, 0.35);
-      box-shadow: 0 24px 48px -12px rgba(255, 159, 10, 0.12);
+      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease;
     }
     .card-interactive:active {
-      transform: scale(0.985);
+      transform: scale(0.97);
     }
-    /* Custom Range Slider (iOS Style) */
-    input[type="range"].ios-slider {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 100%;
-      height: 10px;
-      background: rgba(255, 255, 255, 0.18);
-      border-radius: 999px;
-      outline: none;
-    }
-    input[type="range"].ios-slider::-webkit-slider-thumb {
-      -webkit-appearance: none;
-      appearance: none;
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: #FFFFFF;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.6), 0 0 0 3px rgba(255, 159, 10, 0.9);
-      cursor: pointer;
-      transition: transform 0.15s ease;
-    }
-    input[type="range"].ios-slider::-webkit-slider-thumb:active {
-      transform: scale(1.15);
-      background: #FFD60A;
-    }
-    /* Hide number input spinners for clean iOS look */
+    /* Hide number spinners */
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
       -webkit-appearance: none;
@@ -122,41 +89,25 @@
     input[type=number] {
       -moz-appearance: textfield;
     }
-    /* Custom Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-      height: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: transparent;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.18);
-      border-radius: 999px;
-    }
-    /* Device Frame Simulation for Preview Mode */
+    /* Viewport Simulation */
     .viewport-iphone {
       max-width: 430px !important;
-      margin: 1.5rem auto !important;
+      margin: 1rem auto !important;
       border: 10px solid #27272A !important;
       border-radius: 48px !important;
-      box-shadow: 0 0 0 2px #52525B, 0 35px 80px rgba(0,0,0,0.95) !important;
       overflow-x: hidden;
     }
     .viewport-ipad {
       max-width: 960px !important;
-      margin: 1.5rem auto !important;
+      margin: 1rem auto !important;
       border: 12px solid #27272A !important;
       border-radius: 36px !important;
-      box-shadow: 0 0 0 2px #52525B, 0 35px 80px rgba(0,0,0,0.95) !important;
       overflow-x: hidden;
     }
     /* Extra-Large Kitchen Font Mode */
     .kitchen-mode .weight-num {
-      font-size: 3rem !important;
-      line-height: 3.4rem !important;
+      font-size: 1.35rem !important;
     }
     .kitchen-mode .ing-title {
-      font-size: 1.85rem !important;
-      line-height: 2.3rem !important;
+      font-size: 1rem !important;
     }

@@ -1,4 +1,4 @@
-<!-- Jasmine's Bakery Studio Dashboard | Version: v2.2.0 | Synced with Google Sheet gid=2001 (89 Ingredients & 20 Recipes) -->
+<!-- 3CatsMomBakery Dashboard | Version: v2.3.0 | 3-Block No-Scroll Mobile Layout | Synced with gid=2001 -->
 <!DOCTYPE html>
 <html lang="zh-TW" class="dark">
 <head>
@@ -6,14 +6,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-  <meta name="apple-mobile-web-app-title" content="Jasmine 烘焙中樞 v2.2" />
+  <meta name="apple-mobile-web-app-title" content="3CatsMomBakery" />
   <meta name="theme-color" content="#000000" />
   <title>3CatsMomBakery — 職人烘焙配方計算器與成本總攬</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+TC:wght@300;400;500;600;700;900&display=swap" rel="stylesheet">
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -46,580 +46,323 @@
   </script>
   <link rel="stylesheet" href="style.css" />
 </head>
-<body class="min-h-screen pb-28 md:pb-16 selection:bg-amber-500/30 selection:text-amber-200">
+<body class="min-h-screen selection:bg-amber-500/30 selection:text-amber-200">
 
-  <!-- Ambient Apple Keynote Backlight Glows -->
-  <div class="fixed inset-0 pointer-events-none overflow-hidden z-0">
-    <div class="absolute -top-36 left-1/4 w-[520px] h-[520px] rounded-full bg-amber-500/10 blur-[130px]" style="animation: pulseGlow 9s infinite ease-in-out;"></div>
-    <div class="absolute top-1/3 -right-28 w-[440px] h-[440px] rounded-full bg-blue-500/10 blur-[140px]" style="animation: pulseGlow 12s infinite ease-in-out 2s;"></div>
-    <div class="absolute -bottom-32 left-1/3 w-[480px] h-[480px] rounded-full bg-orange-600/10 blur-[140px]"></div>
-  </div>
+  <!-- Main App Wrapper -->
+  <div id="appFrameWrapper" class="relative z-10 w-full transition-all duration-300">
 
-  <!-- Main App Wrapper (supports device preview frame switching) -->
-  <div id="appFrameWrapper" class="relative z-10 w-full transition-all duration-500">
-
-    <!-- Sticky Apple Top Navigation Bar -->
-    <header class="sticky top-0 z-40 apple-nav-glass px-4 sm:px-6 lg:px-10 py-3 sm:py-3.5">
-      <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-3">
+    <!-- Sticky Apple Top Navigation Bar (Safe Area Protected) -->
+    <header class="sticky top-0 z-40 apple-nav-glass px-3.5 sm:px-6 lg:px-10 pb-2.5" style="padding-top: calc(env(safe-area-inset-top, 0px) + 0.45rem);">
+      <div class="max-w-7xl mx-auto flex items-center justify-between gap-2">
         <!-- Big Brand Title: 3CatsMomBakery (大標) -->
-        <div class="flex items-center justify-between">
-          <div class="flex items-center gap-2.5">
-            <span class="text-3xl sm:text-4xl select-none">🐱</span>
-            <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight text-white leading-none">
-              <span class="text-gradient-gold">3CatsMomBakery</span>
-            </h1>
-          </div>
-
-          <!-- Mobile Right Quick Tools (Spreadsheet & GitHub) -->
-          <div class="flex items-center gap-2 md:hidden">
-            <a href="https://docs.google.com/spreadsheets/d/1jDieeGiKFCe8vaAAr6H7entZuC3gUYEQCYz-O3LkZuo/edit?gid=2001#gid=2001" target="_blank" rel="noopener noreferrer" class="apple-glass-pill px-2.5 py-1.5 rounded-full text-xs font-bold text-amber-300 flex items-center gap-1" title="開啟 Google 試算表">
-              <span>📊 試算表</span>
-            </a>
-            <button type="button" onclick="document.getElementById('githubModal').classList.remove('hidden')" class="px-2.5 py-1.5 rounded-full text-xs font-bold bg-amber-500 text-black">
-              GitHub
-            </button>
-          </div>
+        <div class="flex items-center gap-2 shrink-0">
+          <span class="text-2xl sm:text-3xl select-none">🐱</span>
+          <h1 class="text-xl sm:text-2xl lg:text-3xl font-black tracking-tight text-white leading-none">
+            <span class="text-gradient-gold">3CatsMomBakery</span>
+          </h1>
         </div>
 
-        <!-- Center/Right Segmented Navigation: 3 Tabs (配方計算器 + 原物料資料庫 + 成本總攬) -->
-        <div class="flex items-center justify-between md:justify-end gap-2.5">
-          <nav class="flex items-center gap-1 sm:gap-1.5 p-1 rounded-full bg-white/[0.08] border border-white/12 w-full md:w-auto" aria-label="主要導覽">
-            <button type="button" data-tab="calculator" class="nav-tab-btn flex-1 md:flex-none px-4 sm:px-5 py-2 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-white text-black shadow-sm">
+        <!-- The 3 Requested Tabs (配方計算器 + 原物料資料庫 + 成本總攬) -->
+        <div class="flex items-center gap-2">
+          <nav class="flex items-center gap-1 p-1 rounded-full bg-white/[0.08] border border-white/12 shrink-0" aria-label="主要導覽">
+            <button type="button" data-tab="calculator" class="nav-tab-btn px-3 sm:px-4 py-1.5 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-white text-black shadow-sm whitespace-nowrap">
               ⚖️ 配方計算器
             </button>
-            <div class="flex items-center flex-1 md:flex-none">
-              <button type="button" data-tab="ingredients" class="nav-tab-btn w-full px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center justify-center gap-1">
+            <div class="flex items-center">
+              <button type="button" data-tab="ingredients" class="nav-tab-btn px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center gap-1 whitespace-nowrap">
                 <span>🌾 原物料資料庫</span>
-                <span class="lock-indicator text-[11px] text-amber-400">🔒</span>
+                <span class="lock-indicator text-[10px] text-amber-400">🔒</span>
               </button>
             </div>
-            <div class="flex items-center flex-1 md:flex-none">
-              <button type="button" data-tab="pricing" class="nav-tab-btn w-full px-3.5 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center justify-center gap-1">
+            <div class="flex items-center">
+              <button type="button" data-tab="pricing" class="nav-tab-btn px-2.5 sm:px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center gap-1 whitespace-nowrap">
                 <span>📊 成本總攬</span>
-                <span class="lock-indicator text-[11px] text-amber-400">🔒</span>
+                <span class="lock-indicator text-[10px] text-amber-400">🔒</span>
               </button>
             </div>
           </nav>
 
-          <!-- Desktop Quick Actions: Google Sheet Link, Kitchen Mode & GitHub Modal Button -->
-          <div class="hidden md:flex items-center gap-2">
-            <a href="https://docs.google.com/spreadsheets/d/1jDieeGiKFCe8vaAAr6H7entZuC3gUYEQCYz-O3LkZuo/edit?gid=2001#gid=2001" target="_blank" rel="noopener noreferrer" class="apple-glass-pill px-3 py-2 rounded-full text-xs font-semibold text-amber-300 hover:text-white flex items-center gap-1" title="開啟 Google 試算表">
-              <span>📊 雲端試算表</span>
+          <!-- Quick Tools (Google Sheet & GitHub) -->
+          <div class="hidden sm:flex items-center gap-1.5 shrink-0">
+            <a href="https://docs.google.com/spreadsheets/d/1jDieeGiKFCe8vaAAr6H7entZuC3gUYEQCYz-O3LkZuo/edit?gid=2001#gid=2001" target="_blank" rel="noopener noreferrer" class="apple-glass-pill px-2.5 py-1.5 rounded-full text-xs font-semibold text-amber-300 hover:text-white flex items-center gap-1" title="開啟 Google 試算表">
+              <span>📊 試算表</span>
               <span class="text-[10px]">↗</span>
             </a>
-            <button type="button" id="kitchenModeBtn" class="apple-glass-pill px-3 py-2 rounded-full text-xs font-semibold text-zinc-200 hover:text-white flex items-center gap-1.5" title="切換超大字體顯示">
+            <button type="button" id="kitchenModeBtn" class="apple-glass-pill px-2.5 py-1.5 rounded-full text-xs font-semibold text-zinc-200 hover:text-white flex items-center gap-1" title="切換大字秤重">
               <span>🧑‍🍳</span>
-              <span>大字秤重</span>
             </button>
-            <button type="button" id="openGithubModalBtn" class="px-3.5 py-2 rounded-full text-xs font-semibold bg-gradient-to-r from-amber-400 to-orange-500 text-black shadow-md shadow-amber-500/20 hover:brightness-110 active:scale-95 transition-all flex items-center gap-1">
-              <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-              <span>GitHub 部署</span>
+            <button type="button" id="openGithubModalBtn" class="px-3 py-1.5 rounded-full text-xs font-semibold bg-gradient-to-r from-amber-400 to-orange-500 text-black shadow-sm hover:brightness-110 active:scale-95 transition-all flex items-center gap-1">
+              <span>GitHub</span>
             </button>
           </div>
         </div>
       </div>
     </header>
 
-    <!-- Main Container -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-10 pt-4 sm:pt-6 space-y-7">
-
-
+    <!-- Main Container: 3 Blocks Layout (No Scroll Required) -->
+    <main class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-10 py-2 sm:py-3 space-y-2">
 
       <!-- ===================================================================== -->
-      <!-- TAB 1: 首頁 — 兩步驟大字速查 (STEP 1 分類選品與數量 ➔ STEP 2 即時原料克數) -->
+      <!-- TAB 1: 首頁三塊極簡速查 (區塊1 選種類 ➔ 區塊2 左右選品項 ➔ 區塊3 即時配方) -->
       <!-- ===================================================================== -->
-      <section id="tab-calculator" class="tab-panel space-y-8 animate-spring">
+      <section id="tab-calculator" class="tab-panel space-y-2 animate-spring">
         
-        <!-- =============================================================== -->
-        <!-- STEP 1: 分類選擇要製作的品項 + 欲製作數量 (整數進位，已移除配方倍率) -->
-        <!-- =============================================================== -->
-        <div class="apple-glass rounded-3xl p-5 sm:p-8 space-y-6 border border-amber-500/30">
-          
-          <!-- Step 1 Header -->
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
-            <div class="flex items-center gap-3">
-              <span class="px-3.5 py-1.5 rounded-xl bg-amber-400 text-black font-extrabold text-sm sm:text-base tracking-wide">STEP 1</span>
-              <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">
-                選擇要製作的品項與數量
-              </h2>
-            </div>
-            <span class="text-sm sm:text-base text-zinc-300 font-medium">先點選分類，再選擇品項並設定欲製作數量</span>
-          </div>
-
-          <!-- 1A. Product Category Filter Tabs (分類呈現，不用全部攤開) -->
-          <div class="space-y-3">
-            <div class="text-sm sm:text-base font-bold text-amber-300 flex items-center gap-2">
-              <span>📂 品項分類（點擊切換類別，免全部攤開）：</span>
-            </div>
-            <div id="step1CategoryBar" class="grid grid-cols-2 lg:grid-cols-4 gap-3">
-              <!-- Populated dynamically by JS: 4 clear categories -->
-            </div>
-          </div>
-
-          <!-- 1B. Categorized Product Cards Grid (Large Typography) -->
-          <div id="recipeSelectorGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3.5 sm:gap-4">
-            <!-- Populated dynamically by JS for the active category only -->
-          </div>
-
-          <!-- 1C. Target Quantity Integer Control ONLY (中間的配方倍率直接移除，保留欲製作數量，字體加大) -->
-          <div class="apple-glass-subtle rounded-3xl p-5 sm:p-7 border-2 border-amber-400/45 shadow-xl space-y-5">
-            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
-              
-              <!-- Left: Selected Item Huge Title & Base Yield Info -->
-              <div class="space-y-2">
-                <div class="flex items-center gap-2.5 flex-wrap">
-                  <span class="text-xs sm:text-sm uppercase tracking-wider px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 border border-amber-400/40 font-extrabold">
-                    目前選中品項
-                  </span>
-                  <span id="calcScaleBadge" class="px-3 py-1 rounded-full text-xs sm:text-sm font-mono font-bold bg-white/10 text-zinc-200">
-                    基準 1 份 = 8 條
-                  </span>
-                </div>
-                <h3 id="calcRecipeTitle" class="text-3xl sm:text-5xl font-extrabold text-white tracking-tight">
-                  🍞 生吐司
-                </h3>
-                <p id="calcRecipeMeta" class="text-sm sm:text-lg text-zinc-300 font-medium">
-                  試算表基準：1 份可做 8 條 • 450g 12兩吐司模
-                </p>
-              </div>
-
-              <!-- Right: Enlarged Target Integer Pieces Input (本次欲製作數量 - 整數進位) -->
-              <div class="w-full lg:w-[460px] bg-black/55 rounded-3xl p-4 sm:p-5 border border-white/15 space-y-3">
-                <div class="flex items-center justify-between">
-                  <label for="targetPiecesInput" class="text-base sm:text-xl font-extrabold text-white">
-                    🎯 本次欲製作數量（整數）
-                  </label>
-                  <span id="targetPiecesUnitLabel" class="text-base sm:text-xl font-extrabold text-amber-400">
-                    單位：條
-                  </span>
-                </div>
-
-                <div class="flex items-center justify-between gap-3">
-                  <button type="button" id="decPiecesBtn" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-white/10 hover:bg-white/20 active:scale-90 text-white font-extrabold text-4xl flex items-center justify-center transition-all shrink-0" aria-label="減少製作數量">−</button>
-                  <input type="number" id="targetPiecesInput" value="8" min="1" step="1" class="w-full text-center bg-transparent text-5xl sm:text-6xl font-extrabold text-amber-400 focus:outline-none font-mono" />
-                  <button type="button" id="incPiecesBtn" class="w-16 h-16 sm:w-20 sm:h-20 rounded-2xl bg-amber-500 hover:bg-amber-400 active:scale-90 text-black font-extrabold text-4xl flex items-center justify-center transition-all shadow-lg shadow-amber-500/30 shrink-0" aria-label="增加製作數量">+</button>
-                </div>
-
-                <div id="baseYieldHint" class="text-sm sm:text-base text-zinc-300 text-center font-medium">
-                  試算表 1 份基準產量：<strong class="text-amber-300 font-extrabold">8 條</strong>
-                </div>
-              </div>
-            </div>
-
-            <!-- Smooth Slider & Large Quick Integer Presets -->
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 pt-3 border-t border-white/10 items-center">
-              <div class="lg:col-span-5 space-y-2">
-                <div class="flex justify-between text-sm sm:text-base text-zinc-200 font-semibold">
-                  <span>滑動快速調整數量</span>
-                  <span id="sliderValueText" class="text-amber-300 font-extrabold font-mono">目前：8 條</span>
-                </div>
-                <input type="range" id="piecesSlider" min="1" max="40" step="1" value="8" class="ios-slider" />
-              </div>
-
-              <div class="lg:col-span-7 flex flex-wrap items-center gap-2.5 lg:justify-end">
-                <span class="text-sm sm:text-base font-bold text-zinc-300 mr-1">快速選擇數量：</span>
-                <div id="quickPresetsContainer" class="flex flex-wrap gap-2">
-                  <!-- Populated dynamically by JS -->
-                </div>
-              </div>
-            </div>
+        <!-- ----------------------------------------------------------------- -->
+        <!-- 區塊 1：選種類 (Category Chips - Horizontal, Zero Text Truncation)   -->
+        <!-- ----------------------------------------------------------------- -->
+        <div class="apple-glass rounded-2xl px-3 py-2 border border-white/10 flex items-center gap-2">
+          <span class="text-xs font-black text-amber-400 shrink-0">1. 選種類:</span>
+          <div id="step1CategoryBar" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 flex-1">
+            <!-- Populated dynamically by JS: 4 clean categories with full text -->
           </div>
         </div>
 
-        <!-- =============================================================== -->
-        <!-- STEP 2: 直接給出即時原料克數，字體加大 (STEP 3 已移除)             -->
-        <!-- =============================================================== -->
-        <div class="apple-glass rounded-3xl p-5 sm:p-8 space-y-6 border border-white/15">
-          
-          <!-- Step 2 Header & Action Toolbar -->
-          <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-5 border-b border-white/10">
-            <div class="space-y-1.5">
-              <div class="flex items-center gap-3 flex-wrap">
-                <span class="px-3.5 py-1.5 rounded-xl bg-amber-400 text-black font-extrabold text-sm sm:text-base tracking-wide">STEP 2</span>
-                <h2 class="text-2xl sm:text-4xl font-extrabold text-white tracking-tight">
-                  即時原料克數表
-                </h2>
-                <span id="totalDoughWeightBadge" class="px-4 py-1.5 rounded-full text-sm sm:text-lg font-extrabold font-mono bg-amber-500/20 text-amber-300 border border-amber-400/40">
-                  本批總重 4,426 g
-                </span>
-              </div>
-              <p class="text-sm sm:text-base text-zinc-300 font-medium">
-                已依上方欲製作數量即時換算所有原料克數（點擊任一原料卡片可打勾標記「已備妥」）
-              </p>
+        <!-- ----------------------------------------------------------------- -->
+        <!-- 區塊 2：左右選品項與數量 (Horizontal Product Selector + Integrated Stepper) -->
+        <!-- ----------------------------------------------------------------- -->
+        <div class="apple-glass rounded-2xl p-2.5 sm:p-3 space-y-2 border border-amber-500/25">
+          <!-- Horizontal scrollable product selector chips -->
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-black text-amber-400 shrink-0">2. 左右選品項:</span>
+            <div id="recipeSelectorGrid" class="flex items-center gap-2 overflow-x-auto no-scrollbar py-0.5 flex-1">
+              <!-- Populated dynamically by JS: horizontal cards user swipes left/right -->
+            </div>
+          </div>
+
+          <!-- Integrated Target Quantity Stepper Row -->
+          <div class="flex items-center justify-between gap-2 pt-1.5 border-t border-white/10 bg-black/40 rounded-xl px-3 py-1.5">
+            <div class="min-w-0 flex items-center gap-2">
+              <span class="text-xs text-zinc-400 shrink-0">選中:</span>
+              <div id="calcRecipeTitle" class="font-black text-sm sm:text-base text-white truncate">🍞 生吐司</div>
+              <div id="calcRecipeMeta" class="text-[11px] text-zinc-400 shrink-0 hidden sm:block">基準 1 份：8 條</div>
             </div>
 
-            <!-- Action Buttons: Unit Switcher, Reset Checklist, Copy Recipe, Add to Daily Schedule -->
-            <div class="flex flex-wrap items-center gap-2.5">
-              <div class="flex items-center gap-1 bg-white/[0.08] p-1.5 rounded-2xl border border-white/15 text-sm">
-                <span class="text-zinc-300 px-2 font-semibold">單位:</span>
-                <button type="button" data-unit="g" class="unit-toggle-btn px-3 py-1 rounded-xl bg-amber-500 text-black font-extrabold">g</button>
-                <button type="button" data-unit="kg" class="unit-toggle-btn px-3 py-1 rounded-xl text-zinc-300 hover:text-white font-semibold">kg</button>
-                <button type="button" data-unit="oz" class="unit-toggle-btn px-3 py-1 rounded-xl text-zinc-300 hover:text-white font-semibold">oz</button>
+            <!-- Stepper: − [ targetPieces ] + unit -->
+            <div class="flex items-center gap-1.5 shrink-0">
+              <div id="quickPresetsContainer" class="hidden sm:flex items-center gap-1 overflow-x-auto no-scrollbar mr-1"></div>
+              <span class="text-xs text-zinc-300 font-bold">本次製作:</span>
+              <button type="button" id="decPiecesBtn" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 text-white font-extrabold text-base flex items-center justify-center transition-all">−</button>
+              <input type="number" id="targetPiecesInput" value="8" min="1" step="1" class="w-14 text-center bg-black/70 border border-amber-400/60 rounded-lg text-lg font-black text-amber-400 focus:outline-none font-mono py-0.5" />
+              <button type="button" id="incPiecesBtn" class="w-8 h-8 rounded-lg bg-amber-500 hover:bg-amber-400 active:scale-95 text-black font-extrabold text-base flex items-center justify-center shadow-sm shadow-amber-500/25 transition-all">+</button>
+              <span id="targetPiecesUnitLabel" class="text-xs font-extrabold text-amber-400">條</span>
+            </div>
+          </div>
+
+
+        </div>
+
+        <!-- ----------------------------------------------------------------- -->
+        <!-- 區塊 3：呈現即時配方 (Compact Real-Time Scaled Recipe Grid)         -->
+        <!-- ----------------------------------------------------------------- -->
+        <div class="apple-glass rounded-2xl p-2.5 sm:p-3.5 space-y-2 border border-white/15">
+          <!-- Recipe Header Bar: Title, Total Weight, Units & Actions -->
+          <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-white/10">
+            <div class="flex items-center gap-2 min-w-0">
+              <span class="text-xs sm:text-sm font-black text-amber-300 shrink-0">3. 即時配方克數:</span>
+              <span id="totalDoughWeightBadge" class="text-xs font-extrabold font-mono text-zinc-200 bg-white/10 px-2.5 py-0.5 rounded-full truncate">
+                本批總重 4,426 g
+              </span>
+            </div>
+
+            <div class="flex items-center gap-1.5 shrink-0 text-xs">
+              <div class="flex items-center bg-white/10 rounded-lg p-0.5">
+                <button type="button" data-unit="g" class="unit-toggle-btn px-2 py-0.5 rounded bg-amber-500 text-black font-extrabold">g</button>
+                <button type="button" data-unit="kg" class="unit-toggle-btn px-2 py-0.5 rounded text-zinc-300 font-semibold">kg</button>
               </div>
-              <button type="button" id="resetChecklistBtn" class="apple-glass-pill px-4 py-2.5 rounded-2xl text-sm sm:text-base font-semibold text-zinc-200 hover:text-white">
-                ↺ 重置打勾
+              <button type="button" id="copyScaledRecipeBtn" class="apple-glass-pill px-2.5 py-1 rounded-lg text-amber-300 font-bold hover:text-white" title="複製配方清單">
+                📋 複製
               </button>
-              <button type="button" id="copyScaledRecipeBtn" class="apple-glass-pill px-4 py-2.5 rounded-2xl text-sm sm:text-base text-amber-300 hover:text-amber-200 font-bold">
-                📋 複製本批配方克數
-              </button>
-              <button type="button" id="addToScheduleBtn" class="px-4 py-2.5 rounded-2xl text-sm sm:text-base font-extrabold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 hover:bg-emerald-500/30 transition-all">
-                ＋ 加入今日排程總表
+              <button type="button" id="resetChecklistBtn" class="apple-glass-pill px-2 py-1 rounded-lg text-zinc-300 hover:text-white" title="重置打勾">
+                ↺
               </button>
             </div>
           </div>
 
-          <!-- Weighing Progress Bar & Stage Filter Pills -->
-          <div class="space-y-4">
-            <div class="space-y-2">
-              <div class="flex justify-between text-sm sm:text-base font-semibold">
-                <span id="weighProgressText" class="text-zinc-200">備料秤重進度：已完成 0 / 10 項原料</span>
-                <span id="weighPercentText" class="font-mono font-extrabold text-amber-400 text-lg">0%</span>
-              </div>
-              <div class="w-full h-3 rounded-full bg-white/10 overflow-hidden">
-                <div id="weighProgressBar" class="h-full bg-gradient-to-r from-amber-400 to-emerald-400 transition-all duration-300" style="width: 0%"></div>
-              </div>
-            </div>
-
-            <!-- Stage Filter Pills -->
-            <div id="stageFilterBar" class="flex flex-wrap gap-2.5 pt-1">
-              <!-- Populated dynamically -->
-            </div>
-          </div>
-
-          <!-- Enlarged Real-Time Ingredient Cards Grid (字體加大、標示清楚) -->
-          <div id="scaledIngredientsContainer" class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <!-- Real-Time Ingredients 2-Column Mobile Grid (High-Contrast, Zero-Scroll Fit) -->
+          <div id="scaledIngredientsContainer" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5 sm:gap-2 max-h-[380px] overflow-y-auto pr-0.5">
             <!-- Populated dynamically by JS -->
           </div>
 
-          <!-- Self-Made Starter / Filling Sub-Recipe Instant Breakdown (波蘭種 / 湯種 / 老麵 / 內餡抹醬) -->
-          <div id="poolishHelperBox" class="hidden rounded-3xl p-5 sm:p-6 bg-sky-500/10 border-2 border-sky-400/35 space-y-4">
-            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-              <div class="text-lg sm:text-xl font-extrabold text-sky-300 flex items-center gap-2">
-                <span>🥣 本配方內含「自製酵種／特調抹醬內餡」同步換算克數明細</span>
-              </div>
-              <span id="poolishTargetTotal" class="text-sm sm:text-base font-mono font-bold text-sky-200 bg-sky-500/20 px-3.5 py-1 rounded-full">
-                依本批需求量自動拆解
-              </span>
+          <!-- Self-Made Starter Sub-Recipe Collapsible Drawer -->
+          <div id="poolishHelperBox" class="hidden rounded-xl p-2 bg-sky-500/10 border border-sky-400/25 space-y-1 text-xs">
+            <div class="flex items-center justify-between font-bold text-sky-300">
+              <span>🥣 自製酵種/抹醬克數拆解</span>
+              <span id="poolishTargetTotal" class="text-[10px] font-mono text-sky-200">自動拆解</span>
             </div>
-            <div id="poolishBreakdownGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3.5">
-              <!-- Populated dynamically -->
-            </div>
+            <div id="poolishBreakdownGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-[11px]"></div>
           </div>
-
         </div>
+
       </section>
 
       <!-- ===================================================================== -->
       <!-- TAB 2: 經典配方庫 & 今日多品項排程總表 (受密碼 0410 保護)                -->
       <!-- ===================================================================== -->
-      <section id="tab-recipes" class="tab-panel hidden space-y-6 animate-spring">
-        
-        <!-- Multi-Product Daily Baking Schedule Aggregator -->
-        <div class="apple-glass rounded-3xl p-5 sm:p-7 space-y-5 border border-amber-500/25">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-white/10 pb-4">
+      <section id="tab-recipes" class="tab-panel hidden space-y-5 animate-spring">
+        <div class="apple-glass rounded-2xl p-4 sm:p-6 space-y-4 border border-amber-500/25">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-white/10 pb-3">
             <div>
-              <span class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold">DAILY PRODUCTION PLANNER • 12 款主力販售品項排程</span>
-              <h2 class="text-xl sm:text-2xl font-bold text-white mt-0.5">📅 今日多品項綜合排程與總備料克數彙整</h2>
-              <p class="text-xs text-zinc-400 mt-1">
-                同時設定今日欲製作的多種烘焙品項數量，系統自動跨配方加總所有重複原料（如哥摩高筋、愛樂薇無鹽奶油、湯種、法國老麵等）的總需求克數與總營業利益。
-              </p>
+              <span class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold">DAILY PRODUCTION PLANNER</span>
+              <h2 class="text-lg sm:text-xl font-bold text-white mt-0.5">📅 今日多品項綜合排程與總備料克數彙整</h2>
             </div>
-            <div class="flex items-center gap-2 shrink-0">
-              <button type="button" id="resetScheduleDefaultBtn" class="apple-glass-pill px-3 py-2 rounded-xl text-xs text-zinc-300 hover:text-white">
-                還原試算表預設排程
-              </button>
-              <button type="button" id="clearScheduleBtn" class="apple-glass-pill px-3 py-2 rounded-xl text-xs text-zinc-300 hover:text-white">
-                全部歸零
-              </button>
-              <button type="button" id="copyConsolidatedListBtn" class="px-3.5 py-2 rounded-xl text-xs font-semibold bg-amber-500 text-black hover:bg-amber-400 transition-all">
-                📋 複製總備料清單
-              </button>
+            <div class="flex items-center gap-2">
+              <button type="button" id="resetScheduleDefaultBtn" class="apple-glass-pill px-3 py-1.5 rounded-xl text-xs text-zinc-300">還原預設</button>
+              <button type="button" id="clearScheduleBtn" class="apple-glass-pill px-3 py-1.5 rounded-xl text-xs text-zinc-300">清空</button>
+              <button type="button" id="copyConsolidatedListBtn" class="px-3 py-1.5 rounded-xl text-xs font-semibold bg-amber-500 text-black">📋 複製總備料</button>
             </div>
           </div>
-
-          <!-- 12 Retail Product Quantity Adjusters -->
-          <div id="scheduleProductGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-            <!-- Populated by JS -->
-          </div>
-
-          <!-- Consolidated KPI Summary + Aggregated Ingredients Table -->
-          <div class="grid grid-cols-1 lg:grid-cols-12 gap-5 pt-2">
-            <div class="lg:col-span-4 space-y-3">
-              <div class="apple-glass-subtle rounded-2xl p-4 space-y-3">
-                <div class="text-xs font-semibold text-zinc-300">📊 今日排程財務與工時預估</div>
-                <div class="grid grid-cols-2 gap-2.5">
-                  <div class="p-3 rounded-xl bg-black/40 border border-white/5">
-                    <div class="text-[11px] text-zinc-400">預計總營收</div>
-                    <div id="schedTotalRev" class="text-lg font-extrabold text-sky-400 font-mono">NT$7,090</div>
-                  </div>
-                  <div class="p-3 rounded-xl bg-black/40 border border-white/5">
-                    <div class="text-[11px] text-zinc-400">食材總成本</div>
-                    <div id="schedFoodCost" class="text-lg font-extrabold text-white font-mono">NT$2,748</div>
-                  </div>
-                  <div class="p-3 rounded-xl bg-black/40 border border-white/5">
-                    <div class="text-[11px] text-zinc-400">完整總成本(含工/電/包)</div>
-                    <div id="schedFullCost" class="text-lg font-extrabold text-amber-400 font-mono">NT$5,213</div>
-                  </div>
-                  <div class="p-3 rounded-xl bg-black/40 border border-white/5">
-                    <div class="text-[11px] text-zinc-400">預估總毛利額</div>
-                    <div id="schedNetProfit" class="text-lg font-extrabold text-emerald-400 font-mono">+NT$1,877</div>
-                  </div>
+          <div id="scheduleProductGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2.5"></div>
+          <div class="grid grid-cols-1 lg:grid-cols-12 gap-4 pt-2">
+            <div class="lg:col-span-4 space-y-2">
+              <div class="apple-glass-subtle rounded-xl p-3 space-y-2">
+                <div class="text-xs font-semibold text-zinc-300">📊 今日排程財務預估</div>
+                <div class="grid grid-cols-2 gap-2 text-xs">
+                  <div class="p-2 rounded-lg bg-black/40"><div class="text-zinc-400 text-[10px]">預計營收</div><div id="schedTotalRev" class="font-extrabold text-sky-400 font-mono">NT$0</div></div>
+                  <div class="p-2 rounded-lg bg-black/40"><div class="text-zinc-400 text-[10px]">食材成本</div><div id="schedFoodCost" class="font-extrabold text-white font-mono">NT$0</div></div>
+                  <div class="p-2 rounded-lg bg-black/40"><div class="text-zinc-400 text-[10px]">完整成本</div><div id="schedFullCost" class="font-extrabold text-amber-400 font-mono">NT$0</div></div>
+                  <div class="p-2 rounded-lg bg-black/40"><div class="text-zinc-400 text-[10px]">預估毛利</div><div id="schedNetProfit" class="font-extrabold text-emerald-400 font-mono">+NT$0</div></div>
                 </div>
-                <div id="schedTotalHours" class="text-xs text-zinc-400 pt-1">
-                  ⏱️ 預估總投入工時：約 <strong class="text-white font-mono">11.12</strong> 小時
-                </div>
+                <div id="schedTotalHours" class="text-[11px] text-zinc-400">⏱️ 工時：約 <strong class="text-white font-mono">0</strong> 小時</div>
               </div>
             </div>
-
             <div class="lg:col-span-8">
-              <div class="apple-glass-subtle rounded-2xl p-4 space-y-3">
-                <div class="flex items-center justify-between">
-                  <span class="text-xs font-semibold text-amber-300">🧺 跨品項合併總備料清單（相同原料已自動合併克數）</span>
-                  <span id="schedUniqueIngCount" class="text-[11px] text-zinc-400">共 25 項原料</span>
+              <div class="apple-glass-subtle rounded-xl p-3 space-y-2">
+                <div class="flex items-center justify-between text-xs font-semibold text-amber-300">
+                  <span>🧺 跨品項合併總備料清單</span>
+                  <span id="schedUniqueIngCount" class="text-[10px] text-zinc-400">共 0 項</span>
                 </div>
-                <div id="schedConsolidatedIngList" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2 max-h-72 overflow-y-auto pr-1">
-                  <!-- Populated by JS -->
-                </div>
+                <div id="schedConsolidatedIngList" class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 max-h-56 overflow-y-auto pr-1 text-xs"></div>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- All 20 Classic Recipes Library Cards -->
         <div class="space-y-3">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
-            <div>
-              <h2 class="text-lg sm:text-xl font-bold text-white">📖 經典配方庫完整總覽（共 20 款標準配方與自製酵種內餡）</h2>
-              <p class="text-xs text-zinc-400">完整同步試算表「經典配方庫」分頁（RCP-01 至 RCP-20），點擊任一卡片即可帶入首頁計算克數</p>
-            </div>
-          </div>
-          <div id="classicRecipesBentoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-            <!-- Populated by JS -->
-          </div>
+          <h2 class="text-base font-bold text-white">📖 經典配方庫總覽 (20款)</h2>
+          <div id="classicRecipesBentoGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
         </div>
       </section>
 
       <!-- ===================================================================== -->
-      <!-- TAB 3: 原料資料庫 (89 ITEMS INGREDIENT DATABASE & PRICE SIMULATOR)    -->
+      <!-- TAB 3: 原物料資料庫 (89 ITEMS INGREDIENT DATABASE & PRICE SIMULATOR)    -->
       <!-- ===================================================================== -->
-      <section id="tab-ingredients" class="tab-panel hidden space-y-5 animate-spring">
-        
-        <div class="apple-glass rounded-3xl p-5 sm:p-6 space-y-4">
-          <div class="flex flex-col md:flex-row md:items-center justify-between gap-4">
+      <section id="tab-ingredients" class="tab-panel hidden space-y-4 animate-spring">
+        <div class="apple-glass rounded-2xl p-4 sm:p-6 space-y-3 border border-white/10">
+          <div class="flex flex-col md:flex-row md:items-center justify-between gap-3">
             <div>
-              <span class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold">INGREDIENT DATABASE • 89 ITEMS SYNCED</span>
-              <h2 class="text-xl sm:text-2xl font-bold text-white mt-0.5">🌾 烘焙原料與包材資料庫（89 項完整建檔）</h2>
-              <p class="text-xs text-zinc-400 mt-0.5">
-                完整同步最新試算表「原料資料庫」分頁（A1:H90，含新增起司、抹醬、歐包內餡與法國老麵原料）。可直接點擊修改採購價格試算成本影響。
-              </p>
+              <span class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold">INGREDIENT DATABASE • 89 ITEMS</span>
+              <h2 class="text-lg sm:text-xl font-bold text-white">🌾 烘焙原物料資料庫</h2>
             </div>
-
-            <!-- Search & Supplier Filter & Reset Prices -->
-            <div class="flex flex-wrap items-center gap-2.5">
-              <div class="relative flex-1 sm:w-60">
-                <input type="text" id="ingSearchInput" placeholder="搜尋原料名稱、備註或供應商..." class="w-full rounded-2xl bg-white/[0.07] border border-white/15 pl-9 pr-3 py-2 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-amber-400" />
-                <span class="absolute left-3 top-2.5 text-zinc-400 text-xs">🔍</span>
+            <div class="flex flex-wrap items-center gap-2">
+              <div class="relative flex-1 sm:w-52">
+                <input type="text" id="ingSearchInput" placeholder="搜尋原料名稱或供應商..." class="w-full rounded-xl bg-white/[0.08] border border-white/15 pl-8 pr-3 py-1.5 text-xs text-white placeholder-zinc-400 focus:outline-none focus:border-amber-400" />
+                <span class="absolute left-2.5 top-2 text-zinc-400 text-xs">🔍</span>
               </div>
-              <select id="ingSupplierFilter" class="rounded-2xl bg-zinc-900 border border-white/15 px-3 py-2 text-xs text-zinc-200 focus:outline-none focus:border-amber-400">
+              <select id="ingSupplierFilter" class="rounded-xl bg-zinc-900 border border-white/15 px-2.5 py-1.5 text-xs text-zinc-200 focus:outline-none focus:border-amber-400">
                 <option value="ALL">全部供應商</option>
               </select>
-              <button type="button" id="resetIngPricesBtn" class="apple-glass-pill px-3 py-2 rounded-2xl text-xs text-amber-300 hover:text-amber-200">
-                ↺ 還原預設價格
-              </button>
+              <button type="button" id="resetIngPricesBtn" class="apple-glass-pill px-3 py-1.5 rounded-xl text-xs text-amber-300">↺ 還原價格</button>
             </div>
           </div>
-
-          <!-- Category Filter Pills -->
-          <div id="ingCategoryBar" class="flex flex-wrap gap-1.5 pt-1">
-            <!-- Populated by JS -->
-          </div>
-
-          <!-- Ingredient Count & Summary Bar -->
-          <div class="flex items-center justify-between text-xs text-zinc-400 pt-1">
+          <div id="ingCategoryBar" class="flex flex-wrap gap-1.5 pt-0.5 text-xs"></div>
+          <div class="flex items-center justify-between text-xs text-zinc-400">
             <span id="ingFilteredCount">顯示 89 / 89 項原料</span>
-            <span>💡 點擊「採購價格」欄位可直接編輯試算</span>
+            <span>💡 可修改採購價即時模擬</span>
           </div>
-
-          <!-- Ingredient Responsive Grid / Table -->
-          <div class="overflow-x-auto rounded-2xl border border-white/10">
+          <div class="overflow-x-auto rounded-xl border border-white/10">
             <table class="w-full text-left border-collapse text-xs">
               <thead>
                 <tr class="bg-white/[0.05] text-zinc-300 border-b border-white/10">
-                  <th class="py-3 px-3.5 font-semibold">類別</th>
-                  <th class="py-3 px-3.5 font-semibold">原料名稱</th>
-                  <th class="py-3 px-3.5 font-semibold text-right">採購包裝規格</th>
-                  <th class="py-3 px-3.5 font-semibold text-right">採購價格 (NT$)</th>
-                  <th class="py-3 px-3.5 font-semibold text-right">單位成本 (NT$/單位)</th>
-                  <th class="py-3 px-3.5 font-semibold">主要供應商</th>
-                  <th class="py-3 px-3.5 font-semibold">配方用途 / 備註說明</th>
+                  <th class="py-2.5 px-3">類別</th>
+                  <th class="py-2.5 px-3">原料名稱</th>
+                  <th class="py-2.5 px-3 text-right">包裝規格</th>
+                  <th class="py-2.5 px-3 text-right">採購價格 (NT$)</th>
+                  <th class="py-2.5 px-3 text-right">單位成本</th>
+                  <th class="py-2.5 px-3">供應商</th>
+                  <th class="py-2.5 px-3">說明</th>
                 </tr>
               </thead>
-              <tbody id="ingredientTableBody" class="divide-y divide-white/5">
-                <!-- Populated by JS -->
-              </tbody>
+              <tbody id="ingredientTableBody" class="divide-y divide-white/5 font-mono"></tbody>
             </table>
           </div>
         </div>
       </section>
 
       <!-- ===================================================================== -->
-      <!-- TAB 4: 成本與定價總覽 (12 RETAIL ITEMS COST & PRICING OVERVIEW)         -->
+      <!-- TAB 4: 成本總攬 (12 RETAIL ITEMS COST & PRICING OVERVIEW)               -->
       <!-- ===================================================================== -->
-      <section id="tab-pricing" class="tab-panel hidden space-y-6 animate-spring">
-
-        <!-- Live Batch Cost & Profit Summary Card (連動首頁目前選中品項與數量) -->
-        <div class="apple-glass rounded-3xl p-5 sm:p-7 space-y-5 border border-amber-500/30">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/10 pb-4">
+      <section id="tab-pricing" class="tab-panel hidden space-y-4 animate-spring">
+        <div class="apple-glass rounded-2xl p-4 sm:p-6 space-y-4 border border-amber-500/30">
+          <div class="flex items-center justify-between border-b border-white/10 pb-3">
             <div>
-              <span class="text-xs uppercase tracking-wider text-amber-400 font-bold">LIVE BATCH COST & PROFIT • 連動首頁目前選中品項與數量</span>
-              <h3 class="text-xl sm:text-2xl font-extrabold text-white mt-0.5">💰 本批生產成本與毛利即時核算</h3>
-              <p id="pricingBatchTargetLabel" class="text-xs sm:text-sm text-zinc-300 mt-0.5">目前核算目標：生吐司 × 8 條 (1.00 份)</p>
+              <span class="text-xs uppercase tracking-wider text-amber-400 font-bold">LIVE BATCH COST & PROFIT</span>
+              <h3 class="text-lg sm:text-xl font-extrabold text-white mt-0.5">💰 本批生產成本與毛利即時核算</h3>
+              <p id="pricingBatchTargetLabel" class="text-xs text-zinc-300 mt-0.5">目前核算目標：生吐司 × 8 條</p>
             </div>
-            <button type="button" id="jumpBackToCalcBtn" class="apple-glass-pill px-4 py-2 rounded-xl text-xs font-semibold text-amber-300 hover:text-white self-start sm:self-auto">
-              ← 返回首頁調整品項與份數
+            <button type="button" id="jumpBackToCalcBtn" class="apple-glass-pill px-3 py-1.5 rounded-xl text-xs font-semibold text-amber-300">
+              ← 返回計算器
             </button>
           </div>
-
-          <!-- Special Alert / Toggle for Cinnamon Roll Lemon Zest vs Lemon Juice -->
-          <div id="cinnamonLemonNotice" class="hidden rounded-2xl p-4 bg-amber-500/10 border border-amber-400/30 space-y-2">
-            <div class="flex items-start justify-between gap-2">
-              <div class="text-xs sm:text-sm font-semibold text-amber-300 flex items-center gap-1.5">
-                <span>💡 試算表「肉桂捲 — 焦糖蘋果餡」檸檬成本智慧提示</span>
-              </div>
-              <label class="inline-flex items-center cursor-pointer shrink-0">
-                <input type="checkbox" id="fixCinnamonLemonToggle" class="sr-only peer">
-                <div class="w-9 h-5 bg-zinc-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-zinc-300 after:border after:rounded-full after:h-4 after:w-4 after:transition-all relative peer-checked:bg-emerald-500"></div>
-              </label>
-            </div>
-            <p id="cinnamonLemonDesc" class="text-xs text-zinc-300 leading-relaxed">
-              原試算表中焦糖蘋果餡「檸檬汁 33g」對映至「檸檬皮 (NT$15/顆)」，使 33g 檸檬計為 NT$495。開啟右側開關可切換為「檸檬角/鮮榨檸檬汁 (NT$0.54/g)」檢視真實食材成本。
-            </p>
+          <div id="cinnamonLemonNotice" class="hidden rounded-xl p-3 bg-amber-500/10 border border-amber-400/30 flex items-center justify-between gap-2 text-xs">
+            <span class="text-amber-300">肉桂捲焦糖蘋果餡檸檬汁校正 ($0.54/g)</span>
+            <input type="checkbox" id="fixCinnamonLemonToggle" class="accent-amber-500" />
           </div>
-
-          <!-- 4 Key Financial Mini Cards -->
-          <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-            <div class="apple-glass-subtle rounded-2xl p-4">
-              <div class="text-xs text-zinc-400">本批食材原料總成本</div>
-              <div id="batchFoodCostVal" class="text-xl sm:text-2xl font-extrabold text-white font-mono mt-1">NT$511.4</div>
-              <div id="unitFoodCostVal" class="text-xs text-zinc-400 mt-1">單件分攤：NT$63.92</div>
+          <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
+            <div class="apple-glass-subtle rounded-xl p-3">
+              <div class="text-zinc-400">本批食材成本</div>
+              <div id="batchFoodCostVal" class="text-lg font-black text-white font-mono mt-0.5">NT$0</div>
+              <div id="unitFoodCostVal" class="text-zinc-400 text-[10px] mt-0.5">單件分攤：NT$0</div>
             </div>
-            <div class="apple-glass-subtle rounded-2xl p-4">
-              <div class="text-xs text-zinc-400">本批完整總成本 (含包材/人工/電)</div>
-              <div id="batchTotalCostVal" class="text-xl sm:text-2xl font-extrabold text-amber-400 font-mono mt-1">NT$838.2</div>
-              <div id="unitTotalCostVal" class="text-xs text-zinc-400 mt-1">單件完整成本：NT$104.78</div>
+            <div class="apple-glass-subtle rounded-xl p-3">
+              <div class="text-zinc-400">本批完整總成本</div>
+              <div id="batchTotalCostVal" class="text-lg font-black text-amber-400 font-mono mt-0.5">NT$0</div>
+              <div id="unitTotalCostVal" class="text-zinc-400 text-[10px] mt-0.5">單件成本：NT$0</div>
             </div>
-            <div class="apple-glass-subtle rounded-2xl p-4">
-              <div class="text-xs text-zinc-400">本批預估總營收</div>
-              <div id="batchRevenueVal" class="text-xl sm:text-2xl font-extrabold text-sky-400 font-mono mt-1">NT$1,920</div>
-              <div id="unitPriceVal" class="text-xs text-zinc-400 mt-1">單件目前售價：NT$240</div>
+            <div class="apple-glass-subtle rounded-xl p-3">
+              <div class="text-zinc-400">本批預估營收</div>
+              <div id="batchRevenueVal" class="text-lg font-black text-sky-400 font-mono mt-0.5">NT$0</div>
+              <div id="unitPriceVal" class="text-zinc-400 text-[10px] mt-0.5">目前售價：NT$0</div>
             </div>
-            <div class="apple-glass-subtle rounded-2xl p-4">
-              <div class="text-xs text-zinc-400">本批預估毛利額 / 毛利率</div>
-              <div id="batchProfitVal" class="text-xl sm:text-2xl font-extrabold text-emerald-400 font-mono mt-1">+NT$1,081.8</div>
-              <div id="unitMarginVal" class="text-xs text-emerald-300 mt-1">預估毛利率：56.3%</div>
+            <div class="apple-glass-subtle rounded-xl p-3">
+              <div class="text-zinc-400">預估毛利額 / 率</div>
+              <div id="batchProfitVal" class="text-lg font-black text-emerald-400 font-mono mt-0.5">+NT$0</div>
+              <div id="unitMarginVal" class="text-emerald-300 text-[10px] mt-0.5">毛利率：0%</div>
             </div>
           </div>
-
-          <!-- Detailed Cost Breakdown Table -->
-          <div class="overflow-x-auto rounded-2xl border border-white/10 p-3 bg-black/30">
-            <table class="w-full text-left border-collapse text-xs sm:text-sm">
-              <thead>
-                <tr class="border-b border-white/10 text-zinc-400">
-                  <th class="py-2 px-2 font-medium">成本結構項目</th>
-                  <th class="py-2 px-2 font-medium">計算標準</th>
-                  <th class="py-2 px-2 font-medium text-right">本批總額</th>
-                  <th class="py-2 px-2 font-medium text-right">單件分攤</th>
-                </tr>
-              </thead>
-              <tbody id="calcCostBreakdownBody" class="divide-y divide-white/5 font-mono">
-                <!-- Populated dynamically by JS -->
-              </tbody>
+          <div class="overflow-x-auto rounded-xl border border-white/10 p-2 bg-black/30">
+            <table class="w-full text-left border-collapse text-xs">
+              <thead><tr class="border-b border-white/10 text-zinc-400"><th class="py-1.5 px-2">項目</th><th class="py-1.5 px-2">標準</th><th class="py-1.5 px-2 text-right">本批總額</th><th class="py-1.5 px-2 text-right">單件分攤</th></tr></thead>
+              <tbody id="calcCostBreakdownBody" class="divide-y divide-white/5 font-mono"></tbody>
             </table>
           </div>
         </div>
-        
-        <!-- 4 Top KPI Cards (Matches 成本與定價總覽 R03:R05 for 12 Retail Products) -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3.5">
-          <div class="apple-glass rounded-3xl p-5">
-            <div class="text-xs text-zinc-400">總烘焙主力販售品項</div>
-            <div class="text-2xl sm:text-3xl font-extrabold text-white mt-1">12 款</div>
-            <div class="text-[11px] text-zinc-400 mt-1">含吐司、肉桂捲、7款軟歐軟法與3款甜點</div>
+
+        <div class="grid grid-cols-2 lg:grid-cols-4 gap-2.5 text-xs">
+          <div class="apple-glass rounded-2xl p-3.5"><div class="text-zinc-400">主力販售品項</div><div class="text-xl font-black text-white mt-0.5">12 款</div></div>
+          <div class="apple-glass rounded-2xl p-3.5"><div class="text-zinc-400">整體平均毛利率</div><div id="kpiAvgMargin" class="text-xl font-black text-amber-400 font-mono mt-0.5">31.6%</div></div>
+          <div class="apple-glass rounded-2xl p-3.5"><div class="text-zinc-400">最高毛利品項</div><div id="kpiTopProduct" class="text-xl font-black text-emerald-400 mt-0.5">瑪德蓮</div><div id="kpiTopProductSub" class="text-emerald-300 text-[10px]">64.9%</div></div>
+          <div class="apple-glass rounded-2xl p-3.5"><div class="text-zinc-400">平均單件毛利額</div><div id="kpiAvgProfit" class="text-xl font-black text-sky-400 font-mono mt-0.5">NT$42.78</div></div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-3">
+          <div class="apple-glass rounded-2xl p-3.5 space-y-2">
+            <h3 class="text-xs font-bold text-white">各品項單件成本結構 vs 售價</h3>
+            <div class="relative h-64 w-full"><canvas id="costStructureChart"></canvas></div>
           </div>
-          <div class="apple-glass rounded-3xl p-5">
-            <div class="text-xs text-zinc-400">整體平均毛利率</div>
-            <div id="kpiAvgMargin" class="text-2xl sm:text-3xl font-extrabold text-amber-400 font-mono mt-1">31.6%</div>
-            <div id="kpiAvgMarginSub" class="text-[11px] text-zinc-400 mt-1">全店 12 款販售品項平均毛利率</div>
-          </div>
-          <div class="apple-glass rounded-3xl p-5">
-            <div class="text-xs text-zinc-400">最高毛利明星品項</div>
-            <div id="kpiTopProduct" class="text-2xl sm:text-3xl font-extrabold text-emerald-400 mt-1">瑪德蓮</div>
-            <div id="kpiTopProductSub" class="text-[11px] text-emerald-300 mt-1">毛利率達 64.9%</div>
-          </div>
-          <div class="apple-glass rounded-3xl p-5">
-            <div class="text-xs text-zinc-400">平均單件毛利額</div>
-            <div id="kpiAvgProfit" class="text-2xl sm:text-3xl font-extrabold text-sky-400 font-mono mt-1">NT$42.78</div>
-            <div class="text-[11px] text-zinc-400 mt-1">全品項每件平均利潤</div>
+          <div class="apple-glass rounded-2xl p-3.5 space-y-2">
+            <h3 class="text-xs font-bold text-white">產品毛利率 (%) 比較</h3>
+            <div class="relative h-64 w-full"><canvas id="marginComparisonChart"></canvas></div>
           </div>
         </div>
 
-        <!-- Charts Row (Fixed-Height Containers per Web App Rule 4) -->
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-5">
-          <div class="apple-glass rounded-3xl p-5 sm:p-6 space-y-3">
-            <div>
-              <h3 class="text-base font-bold text-white">🧁 12 款販售品項單件成本結構 vs 目前售價 (NT$)</h3>
-              <p class="text-xs text-zinc-400">堆疊顯示單件食材、包材、人工($196/hr)、電費($5/hr)與單件售價對比</p>
-            </div>
-            <div class="relative h-80 w-full">
-              <canvas id="costStructureChart"></canvas>
-            </div>
+        <div class="apple-glass rounded-2xl p-4 space-y-3">
+          <div class="flex items-center justify-between">
+            <h3 class="text-sm font-bold text-white">12 款品項單位成本與獲利分析表</h3>
+            <button type="button" id="resetPricingSimBtn" class="apple-glass-pill px-3 py-1 rounded-xl text-xs text-amber-300">↺ 還原</button>
           </div>
-
-          <div class="apple-glass rounded-3xl p-5 sm:p-6 space-y-3">
-            <div>
-              <h3 class="text-base font-bold text-white">📈 12 款產品毛利率 (%) 比較</h3>
-              <p class="text-xs text-zinc-400">瑪德蓮 (64.9%)、生吐司 (56.3%) 與蜂蜜起司軟歐 (45.9%) 表現最亮眼</p>
-            </div>
-            <div class="relative h-80 w-full">
-              <canvas id="marginComparisonChart"></canvas>
-            </div>
-          </div>
-        </div>
-
-        <!-- Complete Unit Cost & Profitability Table + Interactive Strategy Simulator -->
-        <div class="apple-glass rounded-3xl p-5 sm:p-6 space-y-4">
-          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div>
-              <span class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold">UNIT ECONOMICS & PRICING SIMULATOR (gid=2001)</span>
-              <h3 class="text-lg sm:text-xl font-bold text-white mt-0.5">12 款主力品項單位成本結構與獲利分析表（支援調價與擴產模擬）</h3>
-              <p class="text-xs text-zinc-400">
-                完整同步試算表「成本與定價總覽 (gid=2001)」。您可直接調整「單批產量」或「目前售價」即時試算毛利率！
-              </p>
-            </div>
-            <button type="button" id="resetPricingSimBtn" class="apple-glass-pill px-3.5 py-2 rounded-xl text-xs text-amber-300 hover:text-amber-200 self-start">
-              ↺ 還原試算表原始定價與產量
-            </button>
-          </div>
-
-          <div class="overflow-x-auto rounded-2xl border border-white/10">
+          <div class="overflow-x-auto rounded-xl border border-white/10">
             <table class="w-full text-left border-collapse text-xs">
-              <thead>
-                <tr class="bg-white/[0.05] text-zinc-300 border-b border-white/10">
-                  <th class="py-3 px-3 font-semibold">產品品項</th>
-                  <th class="py-3 px-3 font-semibold text-center">單批基準產量 (可調)</th>
-                  <th class="py-3 px-3 font-semibold text-right">單件食材</th>
-                  <th class="py-3 px-3 font-semibold text-right">單件包材</th>
-                  <th class="py-3 px-3 font-semibold text-right">單件人工</th>
-                  <th class="py-3 px-3 font-semibold text-right">單件電費</th>
-                  <th class="py-3 px-3 font-semibold text-right">單件完整總成本</th>
-                  <th class="py-3 px-3 font-semibold text-center">目前售價 (可調)</th>
-                  <th class="py-3 px-3 font-semibold text-right">單件毛利額</th>
-                  <th class="py-3 px-3 font-semibold text-right">產品毛利率</th>
-                  <th class="py-3 px-3 font-semibold min-w-[230px]">經營分析與改善建議</th>
-                </tr>
-              </thead>
-              <tbody id="pricingOverviewTableBody" class="divide-y divide-white/5 font-mono">
-                <!-- Populated by JS -->
-              </tbody>
+              <thead><tr class="bg-white/[0.05] text-zinc-300 border-b border-white/10"><th class="py-2.5 px-2">品項</th><th class="py-2.5 px-2 text-center">產量</th><th class="py-2.5 px-2 text-right">食材</th><th class="py-2.5 px-2 text-right">包材</th><th class="py-2.5 px-2 text-right">人工</th><th class="py-2.5 px-2 text-right">電費</th><th class="py-2.5 px-2 text-right">總成本</th><th class="py-2.5 px-2 text-center">售價</th><th class="py-2.5 px-2 text-right">毛利</th><th class="py-2.5 px-2 text-right">毛利率</th><th class="py-2.5 px-2 min-w-[200px]">分析建議</th></tr></thead>
+              <tbody id="pricingOverviewTableBody" class="divide-y divide-white/5 font-mono"></tbody>
             </table>
           </div>
         </div>
@@ -627,118 +370,54 @@
 
     </main>
 
-    <!-- iPhone / iPad Floating Bottom Glass Dock Navigation (3 Tabs) -->
-    <nav class="md:hidden fixed bottom-3 left-3 right-3 z-40 apple-dock-glass rounded-3xl px-2 py-2" style="padding-bottom: calc(0.5rem + var(--safe-bottom));" aria-label="手機底部導覽列">
-      <div class="grid grid-cols-3 gap-1.5">
-        <div class="relative">
-          <button type="button" data-tab="calculator" class="nav-tab-btn w-full flex flex-col items-center justify-center py-2 rounded-2xl transition-all bg-white/15 text-amber-400 font-bold">
-            <span class="text-lg">⚖️</span>
-            <span class="text-xs mt-0.5 font-bold">配方計算器</span>
-          </button>
-        </div>
-        <div class="relative">
-          <button type="button" data-tab="ingredients" class="nav-tab-btn w-full flex flex-col items-center justify-center py-2 rounded-2xl transition-all text-zinc-400">
-            <span class="text-lg">🌾</span>
-            <span class="text-xs mt-0.5 font-medium">原物料資料庫</span>
-          </button>
-          <span class="lock-indicator absolute top-1.5 right-3 text-[10px] pointer-events-none">🔒</span>
-        </div>
-        <div class="relative">
-          <button type="button" data-tab="pricing" class="nav-tab-btn w-full flex flex-col items-center justify-center py-2 rounded-2xl transition-all text-zinc-400">
-            <span class="text-lg">📊</span>
-            <span class="text-xs mt-0.5 font-medium">成本總攬</span>
-          </button>
-          <span class="lock-indicator absolute top-1.5 right-3 text-[10px] pointer-events-none">🔒</span>
-        </div>
-      </div>
-    </nav>
-
   </div>
 
-  <!-- ======================================================================= -->
-  <!-- MODAL: GitHub Pages Commit Guide & iPhone / iPad Web App Setup          -->
-  <!-- ======================================================================= -->
+  <!-- MODAL: GitHub Pages Commit Guide -->
   <div id="githubModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/80 backdrop-blur-md">
-    <div class="apple-glass rounded-3xl max-w-2xl w-full p-6 sm:p-8 space-y-5 border border-white/20 max-h-[90vh] overflow-y-auto animate-spring">
-      <div class="flex items-start justify-between gap-4">
-        <div>
-          <span class="text-[11px] uppercase tracking-wider text-amber-400 font-semibold">GITHUB PAGES & iOS PWA READY • VERSION v2.2.0</span>
-          <h3 class="text-xl sm:text-2xl font-bold text-white mt-0.5">🚀 GitHub Commit 部署與 iPhone / iPad 安裝指南</h3>
-        </div>
-        <button type="button" id="closeGithubModalBtn" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-zinc-300">✕</button>
+    <div class="apple-glass rounded-3xl max-w-lg w-full p-6 space-y-4 border border-white/20 text-xs sm:text-sm text-zinc-300">
+      <div class="flex items-center justify-between border-b border-white/10 pb-3">
+        <h3 class="text-lg font-bold text-white">🚀 GitHub Commit 部署指南</h3>
+        <button type="button" id="closeGithubModalBtn" class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-zinc-300">✕</button>
       </div>
-
-      <div class="space-y-4 text-xs sm:text-sm text-zinc-300 leading-relaxed">
-        <div class="apple-glass-subtle rounded-2xl p-4 space-y-2 border border-amber-500/30">
-          <div class="font-semibold text-amber-300">✨ 單一檔案零相依架構（Single-File Self-Contained HTML • v2.2.0）</div>
-          <p class="text-xs text-zinc-300">
-            本 Dashboard (v2.2.0) 已將最新試算表完整 <strong>89 項原料資料庫</strong>、<strong>20 款配方（含 7 款歐包軟法與 8 款自製酵種內餡）</strong>、兩步驟大字速查介面封裝為單一獨立網頁檔，無須後端即可部署於 <strong>GitHub Pages</strong>。
-          </p>
-          <div class="pt-2 flex flex-wrap gap-2">
-            <button type="button" id="downloadIndexHtmlBtn" class="px-4 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs hover:bg-amber-400 transition-all">
-              ⬇️ 下載 index.html (直接上傳 GitHub)
-            </button>
-            <button type="button" id="exportCsvReportBtn" class="apple-glass-pill px-4 py-2 rounded-xl text-xs text-zinc-200">
-              📊 匯出目前配方克數 CSV
-            </button>
-          </div>
-        </div>
-
-        <div class="space-y-2">
-          <div class="flex items-center justify-between">
-            <span class="font-semibold text-white">1. 快速 Commit 至 GitHub 並開啟 GitHub Pages</span>
-            <button type="button" id="copyGitCmdBtn" class="text-xs text-sky-400 hover:underline">📋 複製 Git 指令</button>
-          </div>
-          <pre id="gitCmdBlock" class="p-3.5 rounded-2xl bg-black/80 border border-white/10 font-mono text-[11px] text-emerald-300 overflow-x-auto">git add index.html style.css script.js README.md
-git commit -m "feat(ui,data): release v2.2.0 with 2-step large-font sales layout and 20 synced recipes"
+      <pre id="gitCmdBlock" class="p-3 rounded-xl bg-black/80 border border-white/10 font-mono text-xs text-emerald-300 overflow-x-auto">git add index.html style.css script.js README.md
+git commit -m "feat: 3-block no-scroll mobile layout for 3CatsMomBakery"
 git push origin main</pre>
-        </div>
+      <div class="flex gap-2">
+        <button type="button" id="copyGitCmdBtn" class="flex-1 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs">📋 複製指令</button>
+        <button type="button" id="downloadIndexHtmlBtn" class="flex-1 py-2 rounded-xl apple-glass-pill font-bold text-xs text-white">⬇️ 下載 HTML</button>
+        <button type="button" id="exportCsvReportBtn" class="flex-1 py-2 rounded-xl apple-glass-pill text-xs text-zinc-300">📊 匯出 CSV</button>
       </div>
     </div>
   </div>
 
-  <!-- ======================================================================= -->
-  <!-- MODAL: Apple iOS-Style Passcode Lock for Protected Tabs (Password 0410) -->
-  <!-- ======================================================================= -->
+  <!-- MODAL: Passcode Lock (0410) -->
   <div id="passcodeModal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/85 backdrop-blur-xl">
-    <div class="apple-glass rounded-3xl max-w-sm w-full p-6 sm:p-8 space-y-6 border border-white/20 text-center animate-spring">
-      <div class="flex justify-end">
-        <button type="button" id="closePasscodeModalBtn" class="w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-zinc-300 text-sm">✕</button>
-      </div>
-      <div class="space-y-2 -mt-4">
-        <div class="w-14 h-14 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center mx-auto text-2xl shadow-lg shadow-amber-500/15">
-          🔒
-        </div>
-        <h3 class="text-xl font-extrabold text-white">請輸入管理密碼</h3>
-        <p id="passcodeModalSubtitle" class="text-xs text-zinc-400">解鎖後即可瀏覽「經典配方與排程、原料資料庫、成本與定價總覽」</p>
-      </div>
-
-      <div class="space-y-2">
-        <input type="password" id="passcodeInput" maxlength="4" inputmode="numeric" placeholder="••••" class="w-44 text-center text-3xl tracking-[0.5em] font-mono font-extrabold py-2.5 px-4 rounded-2xl bg-black/60 border border-white/20 text-amber-400 focus:outline-none focus:border-amber-400" />
-        <div id="passcodeErrorMsg" class="text-xs font-semibold text-rose-400 h-4"></div>
-      </div>
-
-      <div class="grid grid-cols-3 gap-3 max-w-[260px] mx-auto">
-        <button type="button" data-key="1" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">1</button>
-        <button type="button" data-key="2" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">2</button>
-        <button type="button" data-key="3" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">3</button>
-        <button type="button" data-key="4" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">4</button>
-        <button type="button" data-key="5" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">5</button>
-        <button type="button" data-key="6" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">6</button>
-        <button type="button" data-key="7" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">7</button>
-        <button type="button" data-key="8" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">8</button>
-        <button type="button" data-key="9" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">9</button>
-        <button type="button" id="passcodeClearBtn" class="h-14 rounded-2xl bg-white/5 hover:bg-white/10 text-xs font-semibold text-zinc-400 active:scale-95">清除</button>
-        <button type="button" data-key="0" class="passcode-key h-14 rounded-2xl apple-glass-pill text-xl font-bold text-white active:scale-95">0</button>
-        <button type="button" id="passcodeSubmitBtn" class="h-14 rounded-2xl bg-amber-500 hover:bg-amber-400 text-black font-extrabold text-sm active:scale-95 shadow-md shadow-amber-500/20">確認</button>
+    <div class="apple-glass rounded-3xl max-w-xs w-full p-6 space-y-4 border border-white/20 text-center">
+      <div class="flex justify-end"><button type="button" id="closePasscodeModalBtn" class="text-zinc-400 text-sm">✕</button></div>
+      <div class="w-12 h-12 rounded-2xl bg-amber-500/20 border border-amber-400/40 flex items-center justify-center mx-auto text-xl shadow-md">🔒</div>
+      <h3 class="text-base font-extrabold text-white">請輸入管理密碼</h3>
+      <input type="password" id="passcodeInput" maxlength="4" inputmode="numeric" placeholder="••••" class="w-36 text-center text-2xl tracking-[0.4em] font-mono font-extrabold py-2 rounded-xl bg-black/60 border border-white/20 text-amber-400 focus:outline-none focus:border-amber-400 mx-auto" />
+      <div id="passcodeErrorMsg" class="text-xs text-rose-400 h-3"></div>
+      <div class="grid grid-cols-3 gap-2 max-w-[220px] mx-auto">
+        <button type="button" data-key="1" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">1</button>
+        <button type="button" data-key="2" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">2</button>
+        <button type="button" data-key="3" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">3</button>
+        <button type="button" data-key="4" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">4</button>
+        <button type="button" data-key="5" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">5</button>
+        <button type="button" data-key="6" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">6</button>
+        <button type="button" data-key="7" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">7</button>
+        <button type="button" data-key="8" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">8</button>
+        <button type="button" data-key="9" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">9</button>
+        <button type="button" id="passcodeClearBtn" class="h-11 rounded-xl bg-white/5 text-xs text-zinc-400">清除</button>
+        <button type="button" data-key="0" class="passcode-key h-11 rounded-xl apple-glass-pill font-bold text-white">0</button>
+        <button type="button" id="passcodeSubmitBtn" class="h-11 rounded-xl bg-amber-500 text-black font-extrabold text-xs">確認</button>
       </div>
     </div>
   </div>
 
-  <!-- Toast Notification -->
-  <div id="toastBox" class="fixed top-20 right-4 z-50 hidden px-4 py-2.5 rounded-2xl apple-dock-glass border border-amber-400/40 text-xs sm:text-sm font-semibold text-white shadow-2xl flex items-center gap-2">
-    <span id="toastIcon">✅</span>
-    <span id="toastText">已複製到剪貼簿</span>
+  <!-- Toast -->
+  <div id="toastBox" class="fixed top-16 right-4 z-50 hidden px-3.5 py-2 rounded-2xl apple-dock-glass border border-amber-400/40 text-xs font-semibold text-white shadow-xl flex items-center gap-2">
+    <span id="toastIcon">✅</span><span id="toastText">已複製</span>
   </div>
 
   <script src="script.js"></script>
