@@ -314,34 +314,10 @@
       });
     }
 
-    // Presets: 0.5份、1份、2份、3份 (後面維持本次製作與Stepper)
+    // Quick presets removed per user request (保留顆數計算就好)
     function renderQuickPresets(recipe) {
       const container = document.getElementById('quickPresetsContainer');
-      if (!container) return;
-      container.innerHTML = '';
-      const base = recipe.baseYield;
-      const unit = recipe.yieldUnit;
-
-      const multipliers = [0.5, 1, 2, 3];
-
-      multipliers.forEach(mult => {
-        const pieces = Math.max(1, Math.ceil(base * mult));
-        const isActive = state.targetPieces === pieces;
-
-        const chip = document.createElement('button');
-        chip.type = 'button';
-        chip.className = `px-2 py-0.5 rounded-lg text-xs font-bold transition-all ${
-          isActive ? 'bg-amber-400 text-black font-extrabold shadow-sm' : 'apple-glass-pill text-zinc-300 hover:text-white'
-        }`;
-        chip.textContent = `${mult}份`;
-        chip.title = `${mult}份 (約 ${pieces} ${unit})`;
-        chip.addEventListener('click', () => {
-          state.targetPieces = pieces;
-          state.targetBatches = mult;
-          syncInputsAndRenderCalculator();
-        });
-        container.appendChild(chip);
-      });
+      if (container) container.innerHTML = '';
     }
 
     // Block 3: 呈現即時配方 (Compact 2-Column Scaled Recipe Grid)
@@ -358,6 +334,14 @@
       document.getElementById('calcRecipeTitle').textContent = `${meta.displayEmoji || meta.emoji} ${recipe.name}`;
       document.getElementById('calcRecipeMeta').textContent = `試算表基準：1 份可做 ${recipe.baseYield} ${recipe.yieldUnit}`;
       document.getElementById('targetPiecesUnitLabel').textContent = `${recipe.yieldUnit}`;
+      const batchNum = Number(scale.toFixed(2));
+      const batchStr = (scale % 1 === 0 || Math.abs(scale - Math.round(scale)) < 0.001)
+        ? Math.round(scale)
+        : batchNum;
+      const batchEl = document.getElementById('targetBatchesDisplay');
+      if (batchEl) {
+        batchEl.textContent = `(${batchStr}份)`;
+      }
 
       renderQuickPresets(recipe);
 

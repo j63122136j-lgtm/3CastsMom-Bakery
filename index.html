@@ -62,21 +62,19 @@
           </h1>
         </div>
 
-        <!-- The 3 Simplified Tabs: 配方計算 + 原物料 + 成本總覽 -->
+        <!-- The 3 Simplified Tabs: 配方計算 + 原物料 + 成本總覽 (已移除 🔒 圖示) -->
         <nav class="flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-full bg-white/[0.08] border border-white/12 shrink min-w-0" aria-label="主要導覽">
           <button type="button" data-tab="calculator" class="nav-tab-btn px-2.5 sm:px-3.5 py-1 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-white text-black shadow-sm whitespace-nowrap">
             配方計算
           </button>
           <div class="flex items-center">
-            <button type="button" data-tab="ingredients" class="nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center gap-0.5 whitespace-nowrap">
+            <button type="button" data-tab="ingredients" class="nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center whitespace-nowrap">
               <span>原物料</span>
-              <span class="lock-indicator text-[9px] text-amber-400">🔒</span>
             </button>
           </div>
           <div class="flex items-center">
-            <button type="button" data-tab="pricing" class="nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center gap-0.5 whitespace-nowrap">
+            <button type="button" data-tab="pricing" class="nav-tab-btn px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm font-semibold transition-all text-zinc-300 hover:text-white flex items-center whitespace-nowrap">
               <span>成本總覽</span>
-              <span class="lock-indicator text-[9px] text-amber-400">🔒</span>
             </button>
           </div>
         </nav>
@@ -123,27 +121,26 @@
             </div>
           </div>
 
-          <!-- Clean Presets & Stepper Controls Row (Zero Stacking / Zero Overlap) -->
-          <div class="flex items-center justify-between gap-2 pt-1.5 border-t border-white/10 bg-black/40 rounded-xl px-2.5 sm:px-3 py-1.5">
-            <!-- Left: Batch Presets (0.5份, 1份, 2份, 3份) -->
-            <div class="flex items-center gap-1.5 min-w-0 shrink-0">
-              <span class="text-xs text-zinc-400 font-bold hidden sm:inline">份數:</span>
-              <div id="quickPresetsContainer" class="flex items-center gap-1 overflow-x-auto no-scrollbar"></div>
+          <!-- Stepper Controls Row: 保留顆數計算 (已移除 0.5份/1份/2份/3份) -->
+          <div class="flex items-center justify-between gap-2 pt-1.5 border-t border-white/10 bg-black/40 rounded-xl px-3 py-1.5">
+            <div class="flex items-center gap-1.5 min-w-0">
+              <span class="text-xs sm:text-sm text-zinc-300 font-bold">🎯 本次欲製作數量：</span>
             </div>
 
-            <!-- Right: Stepper: − [ targetPieces ] + unit -->
+            <!-- Stepper: − [ targetPieces ] + unit + (__份) -->
             <div class="flex items-center gap-1.5 shrink-0">
-              <span class="text-xs text-zinc-300 font-bold">本次製作:</span>
-              <button type="button" id="decPiecesBtn" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 text-white font-extrabold text-base flex items-center justify-center transition-all">−</button>
-              <input type="number" id="targetPiecesInput" value="8" min="1" step="1" class="w-14 text-center bg-black/70 border border-amber-400/60 rounded-lg text-lg font-black text-amber-400 focus:outline-none font-mono py-0.5" />
-              <button type="button" id="incPiecesBtn" class="w-8 h-8 rounded-lg bg-amber-500 hover:bg-amber-400 active:scale-95 text-black font-extrabold text-base flex items-center justify-center shadow-sm shadow-amber-500/25 transition-all">+</button>
-              <span id="targetPiecesUnitLabel" class="text-xs font-extrabold text-amber-400">條</span>
+              <button type="button" id="decPiecesBtn" class="w-8 h-8 rounded-lg bg-white/10 hover:bg-white/20 active:scale-95 text-white font-extrabold text-base flex items-center justify-center transition-all shadow-sm" aria-label="減少數量">−</button>
+              <input type="number" id="targetPiecesInput" value="8" min="1" step="1" class="w-16 text-center bg-black/75 border border-amber-400/70 rounded-lg text-lg font-black text-amber-400 focus:outline-none font-mono py-0.5 shadow-inner" />
+              <button type="button" id="incPiecesBtn" class="w-8 h-8 rounded-lg bg-amber-500 hover:bg-amber-400 active:scale-95 text-black font-extrabold text-base flex items-center justify-center shadow-sm shadow-amber-500/25 transition-all" aria-label="增加數量">+</button>
+              <span id="targetPiecesUnitLabel" class="text-xs sm:text-sm font-extrabold text-amber-400">條</span>
+              <span id="targetBatchesDisplay" class="text-xs sm:text-sm font-black text-amber-300 font-mono whitespace-nowrap">(1份)</span>
             </div>
 
             <!-- Hidden elements preserved for JS lookups without cluttering mobile view -->
             <div class="hidden">
               <div id="calcRecipeTitle"></div>
               <div id="calcRecipeMeta"></div>
+              <div id="quickPresetsContainer"></div>
             </div>
           </div>
 
