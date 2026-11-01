@@ -314,7 +314,7 @@
       });
     }
 
-    // Presets & Calculator Sync
+    // Presets: 0.5份、1份、2份、3份 (後面維持本次製作與Stepper)
     function renderQuickPresets(recipe) {
       const container = document.getElementById('quickPresetsContainer');
       if (!container) return;
@@ -322,24 +322,22 @@
       const base = recipe.baseYield;
       const unit = recipe.yieldUnit;
 
-      const multipliers = base === 1 ? [1, 2, 3, 4] : [0.5, 1, 1.5, 2];
-      const seenPieces = new Set();
+      const multipliers = [0.5, 1, 2, 3];
 
       multipliers.forEach(mult => {
         const pieces = Math.max(1, Math.ceil(base * mult));
-        if (seenPieces.has(pieces)) return;
-        seenPieces.add(pieces);
-
         const isActive = state.targetPieces === pieces;
+
         const chip = document.createElement('button');
         chip.type = 'button';
         chip.className = `px-2 py-0.5 rounded-lg text-xs font-bold transition-all ${
-          isActive ? 'bg-amber-400 text-black font-extrabold' : 'apple-glass-pill text-zinc-300'
+          isActive ? 'bg-amber-400 text-black font-extrabold shadow-sm' : 'apple-glass-pill text-zinc-300 hover:text-white'
         }`;
-        chip.textContent = `${pieces}${unit}`;
+        chip.textContent = `${mult}份`;
+        chip.title = `${mult}份 (約 ${pieces} ${unit})`;
         chip.addEventListener('click', () => {
           state.targetPieces = pieces;
-          state.targetBatches = pieces / base;
+          state.targetBatches = mult;
           syncInputsAndRenderCalculator();
         });
         container.appendChild(chip);
