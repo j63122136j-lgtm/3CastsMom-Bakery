@@ -1,4 +1,4 @@
-<!-- 3CatsMomBakery Dashboard | Version: v2.3.0 | 3-Block No-Scroll Mobile Layout | Synced with gid=2001 -->
+<!-- 3CatsMomBakery Dashboard | Version: v2.4.0 | Single-Row No-Truncation Recipe View | Synced with gid=2001 -->
 <!DOCTYPE html>
 <html lang="zh-TW" class="dark">
 <head>
@@ -8,7 +8,7 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="3CatsMomBakery" />
   <meta name="theme-color" content="#000000" />
-  <title>3CatsMomBakery — 職人烘焙配方計算器與成本總攬</title>
+  <title>3CatsMomBakery — 職人烘焙配方計算與成本總覽</title>
   <script src="https://cdn.tailwindcss.com/3.4.17"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -51,7 +51,7 @@
   <!-- Main App Wrapper -->
   <div id="appFrameWrapper" class="relative z-10 w-full transition-all duration-300">
 
-        <!-- Sticky Apple Top Navigation Bar (Mobile-Fit, Compact Typography) -->
+    <!-- Sticky Apple Top Navigation Bar (Mobile-Fit, Compact, No Lock Icons) -->
     <header class="sticky top-0 z-40 apple-nav-glass px-2.5 sm:px-6 lg:px-10 pb-2" style="padding-top: calc(env(safe-area-inset-top, 0px) + 0.35rem);">
       <div class="max-w-7xl mx-auto flex items-center justify-between gap-1 sm:gap-3">
         <!-- Big Brand Title: 🐈 3CatsMomBakery (一隻橘貓) -->
@@ -62,7 +62,7 @@
           </h1>
         </div>
 
-        <!-- The 3 Simplified Tabs: 配方計算 + 原物料 + 成本總覽 (已移除 🔒 圖示) -->
+        <!-- The 3 Simplified Tabs: 配方計算 + 原物料 + 成本總覽 (無鎖頭) -->
         <nav class="flex items-center gap-0.5 sm:gap-1 p-0.5 sm:p-1 rounded-full bg-white/[0.08] border border-white/12 shrink min-w-0" aria-label="主要導覽">
           <button type="button" data-tab="calculator" class="nav-tab-btn px-2.5 sm:px-3.5 py-1 rounded-full text-xs sm:text-sm font-extrabold transition-all bg-white text-black shadow-sm whitespace-nowrap">
             配方計算
@@ -95,7 +95,7 @@
     <main class="max-w-7xl mx-auto px-2.5 sm:px-6 lg:px-10 py-2 sm:py-3 space-y-2">
 
       <!-- ===================================================================== -->
-      <!-- TAB 1: 首頁三塊極簡速查 (區塊1 選種類 ➔ 區塊2 左右選品項 ➔ 區塊3 即時配方) -->
+      <!-- TAB 1: 首頁三塊極簡速查 (區塊1 選種類 ➔ 區塊2 選品項 ➔ 區塊3 即時配方) -->
       <!-- ===================================================================== -->
       <section id="tab-calculator" class="tab-panel space-y-2 animate-spring">
         
@@ -105,12 +105,12 @@
         <div class="apple-glass rounded-2xl px-3 py-2 border border-white/10 flex items-center gap-2">
           <span class="text-xs font-black text-amber-400 shrink-0">1. 選種類:</span>
           <div id="step1CategoryBar" class="flex items-center gap-1.5 overflow-x-auto no-scrollbar py-0.5 flex-1">
-            <!-- Populated dynamically by JS: 4 clean categories with full text -->
+            <!-- Populated dynamically by JS -->
           </div>
         </div>
 
         <!-- ----------------------------------------------------------------- -->
-        <!-- 區塊 2：左右選品項與數量 (Horizontal Product Selector + Integrated Stepper) -->
+        <!-- 區塊 2：選品項與數量 (Horizontal Product Selector + Clean Stepper) -->
         <!-- ----------------------------------------------------------------- -->
         <div class="apple-glass rounded-2xl p-2.5 sm:p-3 space-y-2 border border-amber-500/25">
           <!-- Horizontal scrollable product selector chips -->
@@ -121,7 +121,7 @@
             </div>
           </div>
 
-          <!-- Stepper Controls Row: 保留顆數計算 (已移除 0.5份/1份/2份/3份) -->
+          <!-- Stepper Controls Row: 保留顆數計算 + 旁邊加上(__份) -->
           <div class="flex items-center justify-between gap-2 pt-1.5 border-t border-white/10 bg-black/40 rounded-xl px-3 py-1.5">
             <div class="flex items-center gap-1.5 min-w-0">
               <span class="text-xs sm:text-sm text-zinc-300 font-bold">🎯 本次欲製作數量：</span>
@@ -143,15 +143,13 @@
               <div id="quickPresetsContainer"></div>
             </div>
           </div>
-
-
         </div>
 
         <!-- ----------------------------------------------------------------- -->
-        <!-- 區塊 3：呈現即時配方 (Compact Real-Time Scaled Recipe Grid)         -->
+        <!-- 區塊 3：呈現即時配方 (一排一個品項、無「…」、字級清晰完整)          -->
         <!-- ----------------------------------------------------------------- -->
         <div class="apple-glass rounded-2xl p-2.5 sm:p-3.5 space-y-2 border border-white/15">
-          <!-- Recipe Header Bar: Title, Units & Actions (本批總重 removed per user request) -->
+          <!-- Recipe Header Bar: Title, Layout Toggle, Units & Actions -->
           <div class="flex items-center justify-between gap-2 pb-1.5 border-b border-white/10">
             <div class="flex items-center gap-2 min-w-0">
               <span class="text-xs sm:text-sm font-black text-amber-300 shrink-0">3. 即時配方克數:</span>
@@ -159,6 +157,11 @@
             </div>
 
             <div class="flex items-center gap-1.5 shrink-0 text-xs">
+              <!-- Layout Toggle: 單排 (預設) vs 雙排 -->
+              <div class="flex items-center bg-white/10 rounded-lg p-0.5">
+                <button type="button" id="layoutSingleBtn" class="px-2 py-0.5 rounded bg-amber-500 text-black font-bold" title="單排完整呈現">單排</button>
+                <button type="button" id="layoutDoubleBtn" class="px-2 py-0.5 rounded text-zinc-300 font-semibold" title="雙排精簡">雙排</button>
+              </div>
               <div class="flex items-center bg-white/10 rounded-lg p-0.5">
                 <button type="button" data-unit="g" class="unit-toggle-btn px-2 py-0.5 rounded bg-amber-500 text-black font-extrabold">g</button>
                 <button type="button" data-unit="kg" class="unit-toggle-btn px-2 py-0.5 rounded text-zinc-300 font-semibold">kg</button>
@@ -172,8 +175,8 @@
             </div>
           </div>
 
-          <!-- Real-Time Ingredients 2-Column Mobile Grid (High-Contrast, Zero-Scroll Fit) -->
-          <div id="scaledIngredientsContainer" class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-1.5 sm:gap-2 max-h-[380px] overflow-y-auto pr-0.5">
+          <!-- Real-Time Ingredients Grid (Default 1-Column: 一排一個品項，完全不折行截斷) -->
+          <div id="scaledIngredientsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 max-h-[380px] overflow-y-auto pr-0.5">
             <!-- Populated dynamically by JS -->
           </div>
 
@@ -183,7 +186,7 @@
               <span>🥣 自製酵種/抹醬克數拆解</span>
               <span id="poolishTargetTotal" class="text-[10px] font-mono text-sky-200">自動拆解</span>
             </div>
-            <div id="poolishBreakdownGrid" class="grid grid-cols-2 sm:grid-cols-3 gap-1.5 text-[11px]"></div>
+            <div id="poolishBreakdownGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-1.5 text-[11px]"></div>
           </div>
         </div>
 
@@ -282,7 +285,7 @@
       </section>
 
       <!-- ===================================================================== -->
-      <!-- TAB 4: 成本總攬 (12 RETAIL ITEMS COST & PRICING OVERVIEW)               -->
+      <!-- TAB 4: 成本總覽 (12 RETAIL ITEMS COST & PRICING OVERVIEW)               -->
       <!-- ===================================================================== -->
       <section id="tab-pricing" class="tab-panel hidden space-y-4 animate-spring">
         <div class="apple-glass rounded-2xl p-4 sm:p-6 space-y-4 border border-amber-500/30">
@@ -374,7 +377,7 @@
         <button type="button" id="closeGithubModalBtn" class="w-7 h-7 rounded-full bg-white/10 flex items-center justify-center text-zinc-300">✕</button>
       </div>
       <pre id="gitCmdBlock" class="p-3 rounded-xl bg-black/80 border border-white/10 font-mono text-xs text-emerald-300 overflow-x-auto">git add index.html style.css script.js README.md
-git commit -m "feat: 3-block no-scroll mobile layout for 3CatsMomBakery"
+git commit -m "feat: single-row no-truncation recipe view for 3CatsMomBakery"
 git push origin main</pre>
       <div class="flex gap-2">
         <button type="button" id="copyGitCmdBtn" class="flex-1 py-2 rounded-xl bg-amber-500 text-black font-bold text-xs">📋 複製指令</button>

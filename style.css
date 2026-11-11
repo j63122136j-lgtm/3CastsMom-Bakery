@@ -1,4 +1,4 @@
-/* 3CatsMomBakery | Apple Dark Mode & Glassmorphism Stylesheet */
+/* 3CatsMomBakery | Version: v2.4.0 | Apple Dark Mode & Glassmorphism Stylesheet */
 :root {
       --safe-top: env(safe-area-inset-top, 0px);
       --safe-bottom: env(safe-area-inset-bottom, 0px);
@@ -15,7 +15,6 @@
       overflow-x: hidden;
       scroll-behavior: smooth;
     }
-    /* Hide scrollbars for smooth horizontal scrolling */
     .no-scrollbar::-webkit-scrollbar {
       display: none;
     }
@@ -23,16 +22,15 @@
       -ms-overflow-style: none;
       scrollbar-width: none;
     }
-    /* Apple Glassmorphism */
     .apple-glass {
-      background: rgba(26, 26, 32, 0.75);
+      background: rgba(26, 26, 32, 0.78);
       backdrop-filter: blur(24px) saturate(190%);
       -webkit-backdrop-filter: blur(24px) saturate(190%);
       border: 1px solid rgba(255, 255, 255, 0.12);
       box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.7);
     }
     .apple-glass-subtle {
-      background: rgba(36, 36, 44, 0.55);
+      background: rgba(36, 36, 44, 0.58);
       backdrop-filter: blur(18px) saturate(160%);
       -webkit-backdrop-filter: blur(18px) saturate(160%);
       border: 1px solid rgba(255, 255, 255, 0.09);
@@ -49,38 +47,29 @@
       transform: scale(1.02);
     }
     .apple-nav-glass {
-      background: rgba(12, 12, 16, 0.88);
+      background: rgba(12, 12, 16, 0.9);
       backdrop-filter: blur(28px) saturate(200%);
       -webkit-backdrop-filter: blur(28px) saturate(200%);
       border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    .apple-dock-glass {
-      background: rgba(20, 20, 26, 0.88);
-      backdrop-filter: blur(32px) saturate(200%);
-      -webkit-backdrop-filter: blur(32px) saturate(200%);
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.85);
     }
     .text-gradient-gold {
       background: linear-gradient(135deg, #FFF6E5 0%, #FFD60A 45%, #FF9F0A 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    /* Smooth Spring Animations */
     @keyframes fadeUpSpring {
-      0% { opacity: 0; transform: translateY(10px) scale(0.99); }
+      0% { opacity: 0; transform: translateY(8px) scale(0.99); }
       100% { opacity: 1; transform: translateY(0) scale(1); }
     }
     .animate-spring {
-      animation: fadeUpSpring 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      animation: fadeUpSpring 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
     .card-interactive {
-      transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.2s ease, background-color 0.2s ease;
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.18s ease, background-color 0.18s ease;
     }
     .card-interactive:active {
-      transform: scale(0.97);
+      transform: scale(0.98);
     }
-    /* Hide number spinners */
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
       -webkit-appearance: none;
@@ -88,34 +77,4 @@
     }
     input[type=number] {
       -moz-appearance: textfield;
-    }
-    /* Viewport Simulation */
-    .viewport-iphone {
-      max-width: 430px !important;
-      margin: 1rem auto !important;
-      border: 10px solid #27272A !important;
-      border-radius: 48px !important;
-      overflow-x: hidden;
-    }
-    .viewport-ipad {
-      max-width: 960px !important;
-      margin: 1rem auto !important;
-      border: 12px solid #27272A !important;
-      border-radius: 36px !important;
-      overflow-x: hidden;
-    }
-    /* Large Recipe Font by Default */
-    .weight-num {
-      font-size: 1.15rem;
-      line-height: 1.35rem;
-    }
-    @media (min-width: 640px) {
-      .weight-num {
-        font-size: 1.3rem;
-        line-height: 1.5rem;
-      }
-    }
-    .ing-title {
-      font-size: 0.95rem;
-      line-height: 1.25rem;
     }
